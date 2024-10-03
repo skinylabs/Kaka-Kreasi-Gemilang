@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('time');
             $table->string('activity');
             $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }

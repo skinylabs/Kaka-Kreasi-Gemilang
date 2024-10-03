@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transportation extends Model
+class TransportationImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tour_id', 'transportation_name'];
+    protected $fillable = ['tour_id', 'transportation_id', 'path'];
 
+    // Many images belong to one transportation
     public function tour()
     {
         return $this->belongsTo(Tour::class);
     }
-
-    public function transportationsImages()
+    public function transportation()
     {
-        return $this->hasMany(TransportationImage::class);
+        return $this->belongsTo(Transportation::class);
     }
 }

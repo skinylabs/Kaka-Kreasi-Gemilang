@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Imports\HotelImport;
-use App\Models\Hotel;
-use App\Models\Tour;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
-class HotelController extends Controller
+use App\Models\HotelImage;
+use Illuminate\Http\Request;
+
+class HotelImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,22 +33,10 @@ class HotelController extends Controller
         //
     }
 
-    public function import(Request $request, Tour $tour)
-    {
-        $request->validate([
-            'file' => 'required|file|mimes:xlsx,csv,xls'
-        ]);
-
-        // Import data dari file dengan tour_id dari route
-        Excel::import(new HotelImport($tour->id), $request->file('file'));
-
-        return redirect()->route('tours.show', $tour->id)->with('success', 'Data Hotel berhasil diimport.');
-    }
-
     /**
      * Display the specified resource.
      */
-    public function show(Hotel $hotel)
+    public function show(HotelImage $hotelImage)
     {
         //
     }
@@ -58,7 +44,7 @@ class HotelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Hotel $hotel)
+    public function edit(HotelImage $hotelImage)
     {
         //
     }
@@ -66,7 +52,7 @@ class HotelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hotel $hotel)
+    public function update(Request $request, HotelImage $hotelImage)
     {
         //
     }
@@ -74,7 +60,7 @@ class HotelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Hotel $hotel)
+    public function destroy(HotelImage $hotelImage)
     {
         //
     }

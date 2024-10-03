@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tour;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -30,6 +31,20 @@ class DatabaseSeeder extends Seeder
             'email'    => 'user2@example.com',
             'role'    => 'user',
             'password'    => bcrypt('user2')
+        ]);
+
+        Tour::create([
+            'user_id' => 2,
+            'name' => 'Tour 1',
+            'start_date' => '2025-01-01',
+            'end_date' => '2025-01-02'
+        ]);
+
+        Tour::create([
+            'user_id' => 3,
+            'name' => 'Tour 2',
+            'start_date' => '2025-01-01',
+            'end_date' => '2025-01-02'
         ]);
     }
 }

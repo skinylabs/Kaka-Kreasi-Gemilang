@@ -1,4 +1,4 @@
-@extends('backend.app')
+@extends('pages.backend.app')
 
 @section('content')
     <div class="flex justify-between items-center mb-6">

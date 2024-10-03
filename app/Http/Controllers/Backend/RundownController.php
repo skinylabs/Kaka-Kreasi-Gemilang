@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
+use App\Imports\RundownImport;
 use App\Models\Rundown;
+use App\Models\Tour;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RundownController extends Controller
 {
@@ -23,6 +25,18 @@ class RundownController extends Controller
     public function create()
     {
         //
+    }
+
+    public function import(Request $request, Tour $tour)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv,xls'
+        ]);
+
+        // Import data dari file dengan tour_id dari route
+        Excel::import(new RundownImport($tour->id), $request->file('file'));
+
+        return redirect()->route('tours.show', $tour->id)->with('success', 'Data Transportasi berhasil diimport.');
     }
 
     /**

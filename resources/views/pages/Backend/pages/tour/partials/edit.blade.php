@@ -1,4 +1,4 @@
-@extends('Backend.app')
+@extends('pages.backend.app')
 
 @section('content')
     <h1>Edit Tour</h1>

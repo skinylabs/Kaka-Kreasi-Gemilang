@@ -21,10 +21,10 @@ class Tour extends Model
         return $this->hasMany(Participant::class);
     }
 
-    // public function transportations()
-    // {
-    //     return $this->hasOne(Transportation::class);
-    // }
+    public function transportations()
+    {
+        return $this->belongsTo(Transportation::class);
+    }
 
     // public function hotel()
     // {

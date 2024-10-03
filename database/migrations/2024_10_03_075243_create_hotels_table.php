@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('hotel_name');
             $table->string('hotel_image')->nullable();
+            $table->foreignId('tour_id')->constrained('tours')->onDelete('cascade');
             $table->timestamps();
         });
     }

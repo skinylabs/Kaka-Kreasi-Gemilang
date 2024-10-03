@@ -31,6 +31,6 @@ class importModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.backend.ui.modal.import-modal');
+        return view('components.ui.modal.import-modal');
     }
 }

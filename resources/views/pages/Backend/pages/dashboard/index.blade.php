@@ -1,4 +1,4 @@
-@extends('Backend.app')
+@extends('pages.backend.app')
 @section('content')
     <div class="w-full flex flex-col gap-4">
         <div class="flex justify-between items-center">
@@ -8,7 +8,7 @@
                 <div class="text-sm sm:text-base ">
                     <ol class="list-none p-0 inline-flex space-x-2">
                         <li class="flex items-center">
-                            <a href="/tour" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">KAKA
+                            <a href="/tours" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">KAKA
                                 TOUR</a>
                             <p class="ml-2">/</p>
                         </li>
@@ -97,7 +97,7 @@
                 button.addEventListener('click', function() {
                     const tourId = this.getAttribute('data-id');
                     // Set form action to the correct route
-                    deleteForm.setAttribute('action', `/admin/tour/${tourId}`);
+                    deleteForm.setAttribute('action', `/tours/${tourId}`);
                     // Show the modal
                     modal.classList.remove('hidden');
                     modal.classList.add('flex');

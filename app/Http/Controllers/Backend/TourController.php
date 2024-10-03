@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\Rundown;
 use App\Models\Tour;
 use App\Models\Transportation;
+use App\Models\TransportationImage;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class TourController extends Controller
     public function index()
     {
         $tours = Tour::all();
-        return view('backend.pages.tour.index', compact('tours'));
+        return view('pages.backend.pages.tour.index', compact('tours'));
     }
 
     /**
@@ -27,7 +28,7 @@ class TourController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('backend.pages.tour.partials.create', compact('users'));
+        return view('pages.backend.pages.tour.partials.create', compact('users'));
     }
 
     /**
@@ -51,11 +52,12 @@ class TourController extends Controller
      */
     public function show(Tour $tour)
     {
-        $transportations = Transportation::where('tour_id', $tour->id)->get();
-        $hotels = Hotel::where('tour_id', $tour->id)->get();
-        $rundowns = Rundown::where('tour_id', $tour->id)->get();
+        $transportation = Transportation::where('tour_id', $tour->id)->get();
+        $transportationImage = TransportationImage::where('tour_id', $tour->id)->get();
+        $hotel = Hotel::where('tour_id', $tour->id)->get();
+        $rundown = Rundown::where('tour_id', $tour->id)->get();
 
-        return view('backend.pages.tour.partials.show', compact('tour', 'transportation', 'hotel', 'rundown'));
+        return view('pages.backend.pages.tour.partials.show', compact('tour', 'transportation', 'transportationImage', 'hotel', 'rundown'));
     }
 
     /**
@@ -64,7 +66,7 @@ class TourController extends Controller
     public function edit(Tour $tour)
     {
         $users = User::all();
-        return view('backend.pages.tour.partials.edit', compact('users', 'tour'));
+        return view('pages.backend.pages.tour.partials.edit', compact('users', 'tour'));
     }
 
     /**
