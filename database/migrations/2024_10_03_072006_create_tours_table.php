@@ -14,13 +14,18 @@ return new class extends Migration
         Schema::create('tours', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('client');
+            $table->string('slug')->unique();
             $table->date('start_date');
             $table->date('end_date');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('tata_tertib_id');
             $table->timestamps();
 
             // Foreign Key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('tata_tertib_id')->references('id')->on('tata_tertibs')->onDelete('cascade');
         });
     }
 

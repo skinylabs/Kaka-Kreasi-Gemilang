@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Transportation;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 
-class TransportationImport implements ToModel
+class TransportationImport implements ToModel, WithCalculatedFormulas
 {
     protected $tourId;
 
@@ -16,9 +17,13 @@ class TransportationImport implements ToModel
 
     public function model(array $row)
     {
+        // Buat slug berdasarkan transportation_name
+        $slug = strtolower(str_replace(' ', '-', $row[0])); // Pastikan row[0] adalah nama transportasi yang tepat
+
         return new Transportation([
             'tour_id' => $this->tourId,
             'transportation_name' => $row[0],
+            'slug' => $slug, // Menambahkan slug
         ]);
     }
 }

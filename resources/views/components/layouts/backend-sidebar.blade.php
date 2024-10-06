@@ -16,6 +16,11 @@
                         'route' => 'tour.index',
                         'icon' => 'dashboard',
                     ],
+                    [
+                        'label' => 'Tata Tertib',
+                        'route' => 'tatatertib.index',
+                        'icon' => 'dashboard',
+                    ],
                 ];
             @endphp
 

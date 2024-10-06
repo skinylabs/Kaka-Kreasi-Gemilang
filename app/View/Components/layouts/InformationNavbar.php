@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class InformationNavbar extends Component
 {
+    public $tour;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($tour)
     {
-        //
+        $this->tour = $tour;
     }
 
     /**

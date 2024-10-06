@@ -15,6 +15,11 @@
             </div>
 
             <div>
+                <label for="client" class="label">Tour Name:</label>
+                <input type="text" name="client" id="client" class="textInput" value="{{ $tour->client }}" required>
+            </div>
+
+            <div>
                 <label for="start_date" class="label">Start Date:</label>
                 <input type="date" name="start_date" id="start_date" class="textInput" value="{{ $tour->start_date }}"
                     required>

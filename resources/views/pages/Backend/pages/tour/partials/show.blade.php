@@ -24,6 +24,86 @@
     <section>
         <div class="flex justify-between items-center mt-6">
             <div>
+                <h1 class="text-2xl font-semibold text-slate-800">
+                    PARTICIPANT
+                </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="{{ route('tour.participant.create', $tour->id) }}"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
+                    Participant</a>
+
+                <!-- Tombol untuk membuka modal participant -->
+                <button onclick="document.getElementById('importParticipantModal').classList.remove('hidden')"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
+                    Import Participant
+                </button>
+            </div>
+        </div>
+
+
+        <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
+
+        <!-- Table -->
+        <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
+            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+                <thead>
+                    <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
+                        <th class="px-6 py-3">No</th>
+                        <th class="px-6 py-3">name</th>
+                        <th class="px-6 py-3">gender</th>
+                        <th class="px-6 py-3">group</th>
+                        <th class="px-6 py-3">room_code</th>
+                        <th class="px-6 py-3">transportation_id</th>
+                        <th class="px-6 py-3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($participant->isEmpty())
+                        <tr>
+                            <td colspan="6" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @else
+                        @foreach ($participant as $p)
+                            <tr class="border-dashed border-t border-gray-200">
+                                <td class="p-2">{{ $loop->iteration }}</td>
+                                <td class="p-2">
+                                    {{ $p->name }}
+                                </td>
+                                <td class="p-2">
+                                    {{ $p->gender === 'L' ? 'Laki-laki' : ($p->gender === 'P' ? 'Perempuan' : 'N/A') }}
+                                </td>
+                                <td class="p-2">
+                                    {{ $p->group }}
+                                </td>
+                                <td class="p-2">
+                                    {{ $p->room_code }}
+                                </td>
+                                <td class="p-2">
+                                    @if ($p->transportation)
+                                        {{ $p->transportation->transportation_name }}
+                                    @else
+                                        Transportation not found
+                                    @endif
+                                </td>
+
+                                <td class="p-2">
+                                    <div class="flex justify-evenly">
+                                        <a href="{{ route('tour.participant.edit', [$tour->id, $p->id]) }}">Edit</a>
+                                        <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}"
+                                            data-participant-id="{{ $p->id }}">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section>
+        <div class="flex justify-between items-center mt-6">
+            <div>
                 <h1 class="text-2xl font-semibold text-slate-800">TRANSPORTATION</h1>
             </div>
             <div class="flex items-center space-x-4">
@@ -49,6 +129,7 @@
                     <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
                         <th class="px-6 py-3">No</th>
                         <th class="px-6 py-3">Armada</th>
+                        <th class="px-6 py-3">Slug</th>
                         <th class="px-6 py-3">Action</th>
                     </tr>
                 </thead>
@@ -62,6 +143,7 @@
                             <tr class="border-dashed border-t border-gray-200">
                                 <td class="p-2">{{ $loop->iteration }}</td>
                                 <td class="p-2">{{ $t->transportation_name }}</td>
+                                <td class="p-2">{{ $t->slug }}</td>
 
                                 <td class="p-2">
                                     <div class="flex justify-evenly">
@@ -158,7 +240,8 @@
 
         <!-- Table -->
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
-            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+            <table
+                class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
                 <thead>
                     <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
                         <th class="px-6 py-3">No</th>
@@ -196,6 +279,61 @@
             </table>
         </div>
     </section>
+    <section>
+        <div class="flex justify-between items-center mt-6">
+            <div>
+                <h1 class="text-2xl font-semibold text-slate-800">HOTEL IMAGES</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="{{ route('tour.hotelImage.create', $tour->id) }}"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
+                    Hotel</a>
+
+
+            </div>
+        </div>
+
+        <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
+        <x-ui.flash-message :message="session('error')" type="error" id="toast-error" />
+
+        <!-- Table -->
+        <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
+            <table
+                class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+                <thead>
+                    <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
+                        <th class="px-6 py-3">No</th>
+                        <th class="px-6 py-3">Gambar Hotel</th>
+                        <th class="px-6 py-3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($hotelImage->isEmpty())
+                        <tr>
+                            <td colspan="6" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @else
+                        @foreach ($hotelImage as $index => $image)
+                            <tr class="border-dashed border-t border-gray-200">
+                                <td class="p-2">{{ $loop->iteration }}</td>
+                                <td class="p-2"> <img src="{{ asset('storage/' . $image->path) }}"
+                                        alt="Gambar Transportasi" class="h-20 w-20 object-cover"></td>
+
+                                <td class="p-2">
+                                    <div class="flex justify-evenly">
+                                        <a
+                                            href="{{ route('tour.transportation.edit', [$tour->id, $image->id]) }}">Edit</a>
+                                        <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}"
+                                            data-transportation-id="{{ $image->id }}">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <section>
         <div class="flex justify-between items-center mt-6">
@@ -206,18 +344,14 @@
                 <a href="{{ route('tour.rundown.create', $tour->id) }}"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
                     Kegiatan</a>
-                <!-- Tombol untuk membuka modal hotel -->
+
+                <!-- Tombol untuk membuka modal import rundown -->
                 <button onclick="document.getElementById('importRundownModal').classList.remove('hidden')"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
                     Import Rundown
                 </button>
-                {{-- <button onclick="openModal()"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
-                    Import dari Excel
-                </button> --}}
             </div>
         </div>
-
 
         <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
 
@@ -230,31 +364,33 @@
                         <th class="px-6 py-3">No</th>
                         <th class="px-6 py-3">Tanggal</th>
                         <th class="px-6 py-3">Waktu</th>
-                        <th class="px-6 py-3">Lokasi</th>
                         <th class="px-6 py-3">Kegiatan</th>
+                        <th class="px-6 py-3">Deskripsi</th>
                         <th class="px-6 py-3">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if ($rundown->isEmpty())
                         <tr>
-                            <td colspan="6"class="w-full text-center ">Belum ada data</td>
+                            <td colspan="6" class="w-full text-center ">Belum ada data</td>
                         </tr>
                     @else
                         @foreach ($rundown as $r)
                             <tr class="border-dashed border-t border-gray-200">
                                 <td class="p-2">{{ $loop->iteration }}</td>
                                 <td class="p-2">
-                                    {{ \Carbon\Carbon::parse($r->activity_date)->translatedFormat('j F Y') }}
+                                    {{ \Carbon\Carbon::parse($r->date)->translatedFormat('j F Y') }}
                                 </td>
                                 <td class="p-2">
-                                    {{ \Carbon\Carbon::parse($r->activity_time)->format('H:i') }} WIB
+                                    {{ \Carbon\Carbon::parse($r->time)->format('H:i') . ' ' . $r->timezone }}
                                 </td>
-                                <td class="p-2">{{ $r->location }}</td>
+
                                 <td class="p-2">{{ $r->activity }}</td>
+                                <td class="p-2">{{ $r->description }}</td>
                                 <td class="p-2">
                                     <div class="flex justify-evenly">
-                                        <a href="{{ route('tours.rundowns.edit', [$tour->id, $r->id]) }}">Edit</a>
+                                        <a href="{{ route('tour.rundown.edit', [$tour->id, $r->id]) }}"
+                                            class="text-blue-500">Edit</a>
                                         <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}"
                                             data-rundown-id="{{ $r->id }}">Delete</button>
                                     </div>
@@ -267,7 +403,12 @@
         </div>
     </section>
 
+
     <!-- Modal untuk Import Transportasi -->
+    <x-ui.modal.import-modal id="importParticipantModal" title="Import Participant"
+        action-url="{{ route('tour.participant.import', $tour->id) }}" />
+
+
     <x-ui.modal.import-modal id="importTransportModal" title="Import Transportasi"
         action-url="{{ route('tour.transportation.import', $tour->id) }}" />
 
@@ -322,7 +463,12 @@
                         url = `/admin/tour/${tourId}/hotel/${entityId}`; // Update URL untuk hotel
                     } else if (this.hasAttribute('data-rundown-id')) {
                         entityId = this.getAttribute('data-rundown-id');
-                        url = `/admin/tour/${tourId}/rundown/${entityId}`; // Update URL untuk hotel
+                        url =
+                            `/admin/tour/${tourId}/rundown/${entityId}`; // Update URL untuk rundown
+                    } else if (this.hasAttribute('data-participant-id')) {
+                        entityId = this.getAttribute('data-participant-id');
+                        url =
+                            `/admin/tour/${tourId}/participant/${entityId}`; // Update URL untuk participant
                     }
 
                     deleteForm.setAttribute('action', url);

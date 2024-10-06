@@ -33,6 +33,9 @@
                             <span>Name</span>
                         </th>
                         <th class="px-6 py-3 ">
+                            <span>Client</span>
+                        </th>
+                        <th class="px-6 py-3 ">
                             <span>Start Date</span>
                         </th>
                         <th class="px-6 py-3 ">
@@ -40,6 +43,9 @@
                         </th>
                         <th class="px-6 py-3 ">
                             <span>User ID</span>
+                        </th>
+                        <th class="px-6 py-3 ">
+                            <span>Tata Tertib</span>
                         </th>
                         <th class="px-6 py-3 ">
                             <span>Action</span>
@@ -51,8 +57,10 @@
                         <tr class="border-dashed border-t border-gray-200">
                             <td class="p-2">{{ $loop->iteration }}</td>
                             <td class="p-2">{{ $tour->name }}</td>
+                            <td class="p-2">{{ $tour->client }}</td>
                             <td class="p-2">{{ $tour->start_date }}</td>
                             <td class="p-2">{{ $tour->end_date }}</td>
+                            <td>{{ $tour->tataTertib->title }}</td>
                             <td class="p-2">{{ $tour->user->name }}</td>
                             <td class="p-2">
                                 <div class="flex justify-evenly">

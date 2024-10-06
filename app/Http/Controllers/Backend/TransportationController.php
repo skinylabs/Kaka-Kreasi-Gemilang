@@ -39,10 +39,14 @@ class TransportationController extends Controller
             'transportation_name' => 'required|string|max:128',
         ]);
 
-        // Simpan dengan menambahkan tour_id
+        // Membuat slug
+        $slug = strtolower(str_replace(' ', '-', $request->transportation_name)); // Mengganti spasi dengan '-' dan menambahkan timestamp
+
+        // Simpan dengan menambahkan tour_id dan slug
         Transportation::create([
             'tour_id' => $tour->id,
             'transportation_name' => $request->transportation_name,
+            'slug' => $slug, // Menambahkan slug
         ]);
 
         return redirect()->route('tour.show', $tour->id)->with('success', 'Transportasi berhasil ditambahkan.');
@@ -86,10 +90,13 @@ class TransportationController extends Controller
             'transportation_name' => 'required|string|max:128',
         ]);
 
+        // Membuat slug baru jika nama transportasi diubah
+        $slug = strtolower(str_replace(' ', '-', $request->transportation_name)) . '-' . time(); // Mengganti spasi dengan '-' dan menambahkan timestamp
+
         // Update data
         $transportation->update([
-            'vehicle' => $request->vehicle,
             'transportation_name' => $request->transportation_name,
+            'slug' => $slug, // Update slug
         ]);
 
         return redirect()->route('tour.show', $tour->id)->with('success', 'Transportasi berhasil diperbarui.');

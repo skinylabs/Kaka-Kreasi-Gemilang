@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('gender')->default('L');
-            $table->string('group');
-            $table->string('room_code');
+            $table->string('gender')->default('L')->nullable();
+            $table->string('group')->nullable();
+            $table->string('room_code')->nullable();
 
+            // Foreign keys
             $table->foreignId('tour_id')->constrained('tours')->onDelete('cascade');
-            $table->foreignId('hotel_id')->constrained('hotels')->onDelete('cascade');
-            $table->foreignId('transportation_id')->constrained('transportations')->onDelete('cascade');
+            // $table->foreignId('hotel_id')->constrained('hotels')->onDelete('cascade');
+            $table->string('transportation_slug'); // Menggunakan string untuk slug
+
             $table->timestamps();
         });
     }

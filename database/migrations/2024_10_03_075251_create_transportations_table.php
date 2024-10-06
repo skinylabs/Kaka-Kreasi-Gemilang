@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('transportations', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('transportation_name');
             // $table->unsignedBigInteger('tour_id');
             $table->foreignId('tour_id')->constrained('tours')->onDelete('cascade');

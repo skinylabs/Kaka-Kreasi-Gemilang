@@ -10,9 +10,13 @@ class Hotel extends Model
     use HasFactory;
     protected $fillable = ['tour_id', 'hotel_name'];
 
-    // One Hotel has many images
-    public function images()
+    public function tour()
     {
-        return $this->hasMany(HotelImage::class);
+        return $this->belongsTo(Tour::class);
     }
+
+    // public function participants()
+    // {
+    //     return $this->hasMany(Participant::class);
+    // }
 }

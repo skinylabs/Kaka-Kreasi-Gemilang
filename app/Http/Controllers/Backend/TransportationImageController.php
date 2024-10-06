@@ -17,7 +17,7 @@ class TransportationImageController extends Controller
     public function index()
     {
         $transportation = TransportationImage::all();
-        return view('pages.backend.pages.tour.pages.transportation.index', compact('transportation', 'tour'));
+        return view('pages.backend.pages.tour.pages.transportation.index', compact('transportationImage', 'tour'));
     }
 
     /**
@@ -35,7 +35,7 @@ class TransportationImageController extends Controller
     {
         // Validasi input
         $request->validate([
-            'transportation_images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'transportation_images.*' => 'required|image|mimes:webp,jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Simpan gambar-gambar yang diupload

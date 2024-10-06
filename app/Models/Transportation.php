@@ -9,15 +9,15 @@ class Transportation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tour_id', 'transportation_name'];
+    protected $fillable = ['tour_id', 'transportation_name', 'slug'];
 
     public function tour()
     {
         return $this->belongsTo(Tour::class);
     }
 
-    public function transportationsImages()
+    public function participants()
     {
-        return $this->hasMany(TransportationImage::class);
+        return $this->hasMany(Participant::class);
     }
 }

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tour_id')->constrained('tours')->onDelete('cascade');
             $table->date('date');
-            $table->time('time');
+            $table->time('time')->nullable();
+            $table->string('timezone')->nullable()->default('WIB');
             $table->string('activity');
             $table->text('description')->nullable();
 

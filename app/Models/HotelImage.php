@@ -9,11 +9,11 @@ class HotelImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['hotel_id', 'image_path'];
+    protected $fillable = ['tour_id', 'path'];
 
-    // Many images belong to one hotel
-    public function hotel()
+    // Many images belong to one transportation
+    public function tour()
     {
-        return $this->belongsTo(Hotel::class);
+        return $this->belongsTo(Tour::class);
     }
 }

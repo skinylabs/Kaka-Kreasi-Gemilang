@@ -35,6 +35,11 @@
             </div>
 
             <div>
+                <label for="client" class="label">Client Name:</label>
+                <input type="text" name="client" id="client" class="textInput" required>
+            </div>
+
+            <div>
                 <label for="start_date" class="label">Start Date:</label>
                 <input type="date" name="start_date" id="start_date" class="textInput" required>
             </div>
@@ -43,6 +48,17 @@
                 <label for="end_date" class="label">End Date:</label>
                 <input type="date" name="end_date" id="end_date" class="textInput" required>
             </div>
+
+            <div>
+                <label for="tata_tertib">Pilih Tata Tertib (Optional)</label>
+                <select name="tata_tertib_id" id="tata_tertib">
+                    <option value="">Gunakan Tata Tertib Default</option>
+                    @foreach ($allTataTertib as $tataTertib)
+                        <option value="{{ $tataTertib->id }}">{{ $tataTertib->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+
 
             <div class="relative inline-block w-full text-gray-700">
                 <label for="end_date" class="label">User:</label>
@@ -63,6 +79,8 @@
                 </div>
             </div>
             <input type="hidden" name="user_id" id="user_id" required>
+
+
 
             <div class="flex justify-end">
                 <button type="submit" class="button-primary w-[20%]">Create Tour</button>
