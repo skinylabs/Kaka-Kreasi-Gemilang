@@ -1,15 +1,31 @@
 @extends('pages.backend.app')
 
 @section('content')
-    <h1>Daftar Transportasi</h1>
+    <h1>Daftar Content Peraturan</h1>
+    <div class="flex justify-between items-center mt-6">
+        <div>
+            <h1 class="text-2xl font-semibold text-slate-800">
+                PARTICIPANT
+            </h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="{{ route('tatatertib.rule.create', $tatatertib->id) }}"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
+                Participant</a>
 
-    <a href="{{ route('tatatertib.rule.create', $tatatertib->id) }}" class="btn btn-primary">Tambah Transportasi</a>
+            <!-- Tombol untuk membuka modal participant -->
+            <button onclick="document.getElementById('importParticipantModal').classList.remove('hidden')"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
+                Import Participant
+            </button>
 
-    <form action="{{ route('tatatertib.rule.import', $tatatertib->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" required>
-        <button type="submit" class="btn btn-success">Impor Data</button>
-    </form>
+
+        </div>
+    </div>
+
+    <!-- Modal untuk Import Transportasi -->
+    <x-ui.modal.import-modal id="importParticipantModal" title="Import Participant"
+        action-url="{{ route('tatatertib.rule.import', $tatatertib->id) }}" />
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -19,8 +35,7 @@
         <thead>
             <tr>
                 <th class="border border-gray-300 p-2">No</th>
-
-                <th class="border border-gray-300 p-2">Tata Tertib ID</th>
+                <th class="border border-gray-300 p-2">Tata Tertib</th>
                 <th class="border border-gray-300 p-2">Content</th>
                 <th class="border border-gray-300 p-2">Aksi</th>
             </tr>
@@ -30,9 +45,8 @@
                 <tr>
                     <td class="border border-gray-300 p-2">{{ $loop->iteration }}</td>
 
+                    <td class="border border-gray-300 p-2">{{ $r->tatatertib->title }}</td>
                     <td class="border border-gray-300 p-2">{{ $r->content }}</td>
-
-
                     <td class="border border-gray-300 p-2">
                         <div class="flex justify-evenly">
                             <a href="{{ route('tatatertib.show', $r->id) }}">View</a>

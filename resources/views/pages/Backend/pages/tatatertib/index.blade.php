@@ -20,7 +20,8 @@
             <tr>
                 <th class="border border-gray-300 p-2">No</th>
 
-                <th class="border border-gray-300 p-2">Tata Tertib</th>
+                <th class="border border-gray-300 p-2">Tata Tertib ID</th>
+                <th class="border border-gray-300 p-2">Nama</th>
 
                 <th class="border border-gray-300 p-2">Aksi</th>
             </tr>

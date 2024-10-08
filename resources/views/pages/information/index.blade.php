@@ -18,8 +18,7 @@
             <h1 class="text-slate-800 text-2xl font-bold text-center">Masukkan Kode</h1>
 
             @if ($errors->any())
-                n
-                <div class="bg-red-500 text-white p-2">
+                <div class="bg-red-500 text-white p-2 rounded-md">
                     {{ $errors->first() }}
                 </div>
             @endif

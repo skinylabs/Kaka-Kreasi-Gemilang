@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Hotel;
 use App\Models\Participant;
 use App\Models\Rundown;
-use App\Models\Security;
 use App\Models\Tour;
 use App\Models\Transportation;
 use App\Models\TransportationImage;
@@ -14,26 +13,6 @@ use Illuminate\Http\Request;
 
 class TourInfoController extends Controller
 {
-
-    public function checkPassword(Request $request)
-    {
-        $request->validate([
-            'password' => 'required|string',
-        ]);
-
-        // Mencari security dengan password yang dimasukkan
-        $security = Security::where('security_password', $request->password)->first();
-
-        if ($security) {
-            // Jika password cocok, redirect ke informasi tour
-            return redirect()->route('tour.info.show', ['slug' => $security->tour->slug]);
-        }
-
-        // Jika tidak ada yang cocok, kembali dengan pesan error
-        return back()->withErrors(['password' => 'Password salah!']);
-    }
-
-
 
     // Method untuk menampilkan detail tour berdasarkan slug
     public function index()

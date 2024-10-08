@@ -41,8 +41,12 @@
             </div>
         </div>
 
+        <!-- Modal untuk Import Participant -->
+        <x-ui.modal.import-modal id="importParticipantModal" title="Import Participant"
+            action-url="{{ route('tour.participant.import', $tour->id) }}" />
 
         <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
+        <x-ui.flash-message :message="session('error')" type="error" id="toast-error" />
 
         <!-- Table -->
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
@@ -119,8 +123,13 @@
             </div>
         </div>
 
+        <!-- Modal untuk Import Transportasi -->
+        <x-ui.modal.import-modal id="importTransportModal" title="Import Transportasi"
+            action-url="{{ route('tour.transportation.import', $tour->id) }}" />
+
 
         <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
+        <x-ui.flash-message :message="session('error')" type="error" id="toast-error" />
 
         <!-- Table -->
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
@@ -204,7 +213,8 @@
 
                                 <td class="p-2">
                                     <div class="flex justify-evenly">
-                                        <a href="{{ route('tour.transportation.edit', [$tour->id, $image->id]) }}">Edit</a>
+                                        <a
+                                            href="{{ route('tour.transportation.edit', [$tour->id, $image->id]) }}">Edit</a>
                                         <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}"
                                             data-transportation-id="{{ $image->id }}">Delete</button>
                                     </div>
@@ -233,6 +243,10 @@
 
             </div>
         </div>
+
+        <!-- Modal untuk Import Hotel -->
+        <x-ui.modal.import-modal id="importHotelModal" title="Import Hotel"
+            action-url="{{ route('tour.hotel.import', $tour->id) }}" />
 
 
         <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
@@ -288,10 +302,10 @@
                 <a href="{{ route('tour.hotelImage.create', $tour->id) }}"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
                     Hotel</a>
-
-
             </div>
         </div>
+
+
 
         <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
         <x-ui.flash-message :message="session('error')" type="error" id="toast-error" />
@@ -404,17 +418,8 @@
     </section>
 
 
-    <!-- Modal untuk Import Transportasi -->
-    <x-ui.modal.import-modal id="importParticipantModal" title="Import Participant"
-        action-url="{{ route('tour.participant.import', $tour->id) }}" />
 
 
-    <x-ui.modal.import-modal id="importTransportModal" title="Import Transportasi"
-        action-url="{{ route('tour.transportation.import', $tour->id) }}" />
-
-    <!-- Modal untuk Import Hotel -->
-    <x-ui.modal.import-modal id="importHotelModal" title="Import Hotel"
-        action-url="{{ route('tour.hotel.import', $tour->id) }}" />
 
     <!-- Modal untuk Import Hotel -->
     <x-ui.modal.import-modal id="importRundownModal" title="Import Rundown"

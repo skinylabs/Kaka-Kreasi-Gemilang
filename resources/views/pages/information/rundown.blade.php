@@ -4,19 +4,12 @@
     <section class="flex flex-col gap-6">
         <div class="text-center">
             <h1 class="text-2xl font-bold text-slate-800">
-                TOUR BROMO
+                {{ $tour->name }}
             </h1>
             <p class="font-bold text-slate-600">
-                SMK MUHAMMADIYAH 1 KLATEN
+                {{ $tour->client }}
             </p>
         </div>
-
-        <!-- Form Pencarian -->
-        {{-- <form action="{{ route('rundown', ['slug' => $tour->slug]) }}" method="GET" class="flex gap-1">
-            <input type="text" name="search" placeholder="Masukkan Nama Kamu" class="textInput"
-                value="{{ request('search') }}">
-            <button type="submit" class="bg-blue-500 text-white rounded-lg px-4 py-2">Cari</button>
-        </form> --}}
 
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px]">
             <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">

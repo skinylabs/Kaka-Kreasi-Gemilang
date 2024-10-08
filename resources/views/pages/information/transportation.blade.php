@@ -4,10 +4,10 @@
     <section class="flex flex-col gap-6">
         <div class="text-center">
             <h1 class="text-2xl font-bold text-slate-800">
-                {{ $title }}
+                {{ $tour->name }}
             </h1>
             <p class="font-bold text-slate-600">
-                SMK MUHAMMADIYAH 1 KLATEN
+                {{ $tour->client }}
             </p>
         </div>
 

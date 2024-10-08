@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\TataTertibController;
 use App\Http\Controllers\Backend\TourController;
 use App\Http\Controllers\Backend\TransportationController;
 use App\Http\Controllers\Backend\TransportationImageController;
+use App\Http\Controllers\Information\FunctionController;
 use App\Http\Controllers\Information\InformationController;
 use App\Http\Controllers\Information\TourInfoController;
 use App\Models\Rundown;
@@ -24,7 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::prefix('information')->group(function () {
     Route::get('/', [TourInfoController::class, 'index'])->name('tour.info');
-    Route::post('/check-password', [TourInfoController::class, 'checkPassword'])->name('tour.checkPassword');
+    Route::post('/check-password', [FunctionController::class, 'checkPassword'])->name('tour.checkPassword');
     Route::get('/{slug}', [TourInfoController::class, 'show'])->name('tour.info.show');
     Route::get('/{slug}/transportation', [TourInfoController::class, 'transportation'])->name('transportation');
     Route::get('/{slug}/hotel', [TourInfoController::class, 'hotel'])->name('hotel');

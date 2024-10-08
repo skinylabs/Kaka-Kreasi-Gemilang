@@ -15,11 +15,11 @@ class RuleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(TataTertib $tataTertib)
+    public function index(TataTertib $tatatertib)
     {
 
         $rule = Rule::all();
-        return view('pages.backend.pages.tatatertib.rule.index', compact('rule', 'tataTertib',));
+        return view('pages.backend.pages.tatatertib.rule.index', compact('rule', 'tatatertib',));
     }
 
     /**
@@ -34,7 +34,7 @@ class RuleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, TataTertib $tataTertib)
+    public function store(Request $request, TataTertib $tatatertib)
     {
         // Validasi input
         $request->validate([
@@ -43,11 +43,11 @@ class RuleController extends Controller
 
         // Simpan dengan menambahkan tour_id dan slug
         Rule::create([
-            'tata_tertib_id' => $tataTertib->id,
+            'tata_tertib_id' => $tatatertib->id,
             'content' => $request->content,
         ]);
 
-        return redirect()->route('rule.index', $tataTertib->id)->with('success', 'Tata Tertib berhasil ditambahkan.');
+        return redirect()->route('tatatertib.rule.index', $tatatertib->id)->with('success', 'Tata Tertib berhasil ditambahkan.');
     }
 
     public function import(Request $request, TataTertib $tataTertib)
