@@ -1,0 +1,47 @@
+@extends('pages.backend.app')
+
+@section('content')
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-2xl font-semibold text-slate-800">Edit Tata Tertib</h1>
+
+            <div class="text-sm sm:text-base">
+                <ol class="list-none p-0 inline-flex space-x-2">
+                    <li class="flex items-center">
+                        <a href="/" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">KAKA
+                            TOUR</a>
+                        <p class="ml-2">/</p>
+                    </li>
+                    <li class="flex items-center">
+                        <a href="/tours" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tata
+                            Tertib</a>
+                        <p class="ml-2">/</p>
+                    </li>
+                    <li class="flex items-center">
+                        <p class="text-gray-800">Edit</p>
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <form action="{{ route('tatatertib.update', $tatatertib->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="mb-4">
+            <label for="title" class="label">Title</label>
+            <input type="text" name="title" id="title" class="textInput"
+                value="{{ old('title', $tatatertib->title) }}" required>
+        </div>
+
+
+
+        <button type="submit" class="button-primary w-[20%]">Update Tata Tertib</button>
+    </form>
+@endsection
