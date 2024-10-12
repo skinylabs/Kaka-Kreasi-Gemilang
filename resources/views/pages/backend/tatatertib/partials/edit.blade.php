@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-semibold text-slate-800">Edit Tata Tertib</h1>
@@ -44,4 +42,4 @@
 
         <button type="submit" class="button-primary w-[20%]">Update Tata Tertib</button>
     </form>
-@endsection
+</x-backend-layout>

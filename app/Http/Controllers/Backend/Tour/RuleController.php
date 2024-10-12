@@ -28,7 +28,7 @@ class RuleController extends Controller
     public function create(TataTertib $tatatertib, Rule $rule)
     {
         $rule = Rule::all();
-        return view('pages.backend.pages.tatatertib.rule.partials.create', compact('tatatertib', 'rule'));
+        return view('pages.backend.tatatertib.rule.partials.create', compact('tatatertib', 'rule'));
     }
 
     /**

@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <h1>Edit Tata Tertib</h1>
 
     @if (session('success'))
@@ -22,4 +20,4 @@
             Update Peraturan
         </button>
     </form>
-@endsection
+</x-backend-layout>

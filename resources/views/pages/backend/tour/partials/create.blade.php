@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-semibold text-slate-800">Create Tour</h1>
@@ -13,7 +11,8 @@
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
-                        <a href="/tours" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
+                        <a href="/tours"
+                            class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
@@ -86,65 +85,66 @@
             </div>
         </div>
     </form>
-@endsection
 
-@section('script')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const customSelect = document.getElementById("custom-select");
-            const optionsContainer = document.getElementById("options");
-            const selectedUser = document.getElementById("selected-user");
-            const hiddenInput = document.getElementById("user_id");
 
-            // Toggle user options visibility
-            customSelect.addEventListener("click", function() {
-                optionsContainer.classList.toggle("hidden");
+    @section('script')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const customSelect = document.getElementById("custom-select");
+                const optionsContainer = document.getElementById("options");
+                const selectedUser = document.getElementById("selected-user");
+                const hiddenInput = document.getElementById("user_id");
+
+                // Toggle user options visibility
+                customSelect.addEventListener("click", function() {
+                    optionsContainer.classList.toggle("hidden");
+                });
+
+                // Select user
+                optionsContainer.addEventListener("click", function(event) {
+                    const value = event.target.dataset.value;
+                    const name = event.target.innerText;
+
+                    if (value) {
+                        selectedUser.innerText = name;
+                        hiddenInput.value = value;
+                    }
+
+                    optionsContainer.classList.add("hidden");
+                });
+
+                // Prevent form submit if user is not selected
+                document.querySelector("form").addEventListener("submit", function(event) {
+                    if (!hiddenInput.value) {
+                        alert('Please select a user.');
+                        event.preventDefault(); // Stop form from submitting
+                    }
+                });
+
+                // Tata Tertib selection
+                const customTataTertibSelect = document.getElementById("custom-tata-tertib-select");
+                const tataTertibOptionsContainer = document.getElementById("tata-tertib-options");
+                const selectedTataTertib = document.getElementById("selected-tata-tertib");
+                const hiddenTataTertibInput = document.getElementById("tata_tertib_id");
+
+                // Toggle tata tertib options visibility
+                customTataTertibSelect.addEventListener("click", function() {
+                    tataTertibOptionsContainer.classList.toggle("hidden");
+                });
+
+                // Select tata tertib
+                tataTertibOptionsContainer.addEventListener("click", function(event) {
+                    const value = event.target.dataset.value;
+                    const name = event.target.innerText;
+
+                    if (value) {
+                        selectedTataTertib.innerText = name;
+                        hiddenTataTertibInput.value = value;
+                    }
+
+                    tataTertibOptionsContainer.classList.add("hidden");
+                });
             });
-
-            // Select user
-            optionsContainer.addEventListener("click", function(event) {
-                const value = event.target.dataset.value;
-                const name = event.target.innerText;
-
-                if (value) {
-                    selectedUser.innerText = name;
-                    hiddenInput.value = value;
-                }
-
-                optionsContainer.classList.add("hidden");
-            });
-
-            // Prevent form submit if user is not selected
-            document.querySelector("form").addEventListener("submit", function(event) {
-                if (!hiddenInput.value) {
-                    alert('Please select a user.');
-                    event.preventDefault(); // Stop form from submitting
-                }
-            });
-
-            // Tata Tertib selection
-            const customTataTertibSelect = document.getElementById("custom-tata-tertib-select");
-            const tataTertibOptionsContainer = document.getElementById("tata-tertib-options");
-            const selectedTataTertib = document.getElementById("selected-tata-tertib");
-            const hiddenTataTertibInput = document.getElementById("tata_tertib_id");
-
-            // Toggle tata tertib options visibility
-            customTataTertibSelect.addEventListener("click", function() {
-                tataTertibOptionsContainer.classList.toggle("hidden");
-            });
-
-            // Select tata tertib
-            tataTertibOptionsContainer.addEventListener("click", function(event) {
-                const value = event.target.dataset.value;
-                const name = event.target.innerText;
-
-                if (value) {
-                    selectedTataTertib.innerText = name;
-                    hiddenTataTertibInput.value = value;
-                }
-
-                tataTertibOptionsContainer.classList.add("hidden");
-            });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
+</x-backend-layout>

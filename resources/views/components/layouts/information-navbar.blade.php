@@ -36,11 +36,16 @@
                 </p>
             </a>
         </div>
-        <a href="{{ route('tour.info') }}" class="py-2 bg-red-500 text-white rounded-lg px-4 w-full">
-            <p class="font-semibold">
-                Keluar
-            </p>
-        </a>
+        {{-- <form method="POST" action="{{ route('tour.logout') }}">
+                @csrf
+                <button type="submit" class="py-2 px-4 bg-red-500 text-white font-semibold rounded-lg">Logout</button>
+            </form> --}}
+        <form method="POST" action="{{ route('tour.logout') }}" class="w-full">
+            @csrf
+            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                {{ __('Log Out') }}
+            </button>
+        </form>
     </div>
 </header>
 

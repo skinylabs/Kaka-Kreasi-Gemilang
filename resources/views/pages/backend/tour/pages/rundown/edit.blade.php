@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-semibold text-slate-800">Edit Rundown</h1>
@@ -13,7 +11,8 @@
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
-                        <a href="/tours" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
+                        <a href="/tours"
+                            class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
@@ -47,11 +46,13 @@
                     Zona Waktu:
                 </label>
                 <select name="timezone" class="textInput">
-                    <option value="WIB" {{ $rundown->timezone == 'WIB' ? 'selected' : '' }}>WIB (Waktu Indonesia Barat)
+                    <option value="WIB" {{ $rundown->timezone == 'WIB' ? 'selected' : '' }}>WIB (Waktu Indonesia
+                        Barat)
                     </option>
                     <option value="WITA" {{ $rundown->timezone == 'WITA' ? 'selected' : '' }}>WITA (Waktu Indonesia
                         Tengah)</option>
-                    <option value="WIT" {{ $rundown->timezone == 'WIT' ? 'selected' : '' }}>WIT (Waktu Indonesia Timur)
+                    <option value="WIT" {{ $rundown->timezone == 'WIT' ? 'selected' : '' }}>WIT (Waktu Indonesia
+                        Timur)
                     </option>
                 </select>
             </div>
@@ -75,4 +76,4 @@
             </div>
         </div>
     </form>
-@endsection
+</x-backend-layout>

@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <div class="flex justify-between items-center">
         <div>
             <h1 class="text-2xl font-semibold text-slate-800">
@@ -21,6 +19,77 @@
             </div>
         </div>
     </div>
+
+    <section>
+        <div class="flex justify-between items-center mt-6">
+            <div>
+                <h1 class="text-2xl font-semibold text-slate-800">TRANSPORTATION</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="{{ route('tour.transportation.create', $tour->id) }}"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
+                    Transportasi</a>
+
+                <!-- Tombol untuk membuka modal transportasi -->
+                <button onclick="document.getElementById('importTransportModal').classList.remove('hidden')"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
+                    Import Transportasi
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal untuk Import Transportasi -->
+        <x-ui.modal.import-modal id="importTransportModal" title="Import Transportasi"
+            action-url="{{ route('tour.transportation.import', $tour->id) }}" method="POST" />
+
+
+        <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
+        <x-ui.flash-message :message="session('error')" type="error" id="toast-error" />
+
+        <!-- Table -->
+        <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
+            <table
+                class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+                <thead>
+                    <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
+                        <th class="px-6 py-3">No</th>
+                        <th class="px-6 py-3">Armada</th>
+                        <th class="px-6 py-3">Slug</th>
+                        <th class="px-6 py-3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($transportation->isEmpty())
+                        <tr>
+                            <td colspan="6" class="text-center">Tidak ada data</td>
+                        </tr>
+                    @else
+                        @foreach ($transportation as $t)
+                            <tr class="border-dashed border-t border-gray-200">
+                                <td class="p-2">{{ $loop->iteration }}</td>
+                                <td class="p-2">{{ $t->transportation_name }}</td>
+                                <td class="p-2">{{ $t->slug }}</td>
+
+                                <td class="p-2">
+                                    <div class="flex gap-4 justify-center">
+                                        <a href="{{ route('tour.transportation.edit', [$tour->id, $t->id]) }}"
+                                            class="bg-blue-500 icon-function">
+                                            <x-icons.icon type="trash" fill="#fff" width="20"
+                                                height="20" /></a>
+                                        <button class="bg-red-500 icon-function" data-id="{{ $tour->id }}"
+                                            data-transportation-id="{{ $t->id }}"> <x-icons.icon type="trash"
+                                                fill="#fff" width="20" height="20" /></button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <section>
         <div class="flex justify-between items-center mt-6">
             <div>
@@ -50,7 +119,8 @@
 
         <!-- Table -->
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
-            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+            <table
+                class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
                 <thead>
                     <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
                         <th class="px-6 py-3">No</th>
@@ -92,10 +162,16 @@
                                 </td>
 
                                 <td class="p-2">
-                                    <div class="flex justify-evenly">
-                                        <a href="{{ route('tour.participant.edit', [$tour->id, $p->id]) }}">Edit</a>
-                                        <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}"
-                                            data-participant-id="{{ $p->id }}">Delete</button>
+                                    <div class="flex gap-4 justify-center">
+                                        <a href="{{ route('tour.participant.edit', [$tour->id, $p->id]) }}"
+                                            class="bg-blue-500 icon-function">
+                                            <x-icons.icon type="trash" fill="#fff" width="20" height="20" />
+                                        </a>
+                                        <button class="bg-red-500 icon-function" data-id="{{ $tour->id }}"
+                                            data-participant-id="{{ $p->id }}">
+                                            <x-icons.icon type="trash" fill="#fff" width="20"
+                                                height="20" />
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -105,71 +181,6 @@
             </table>
         </div>
     </section>
-    <section>
-        <div class="flex justify-between items-center mt-6">
-            <div>
-                <h1 class="text-2xl font-semibold text-slate-800">TRANSPORTATION</h1>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="{{ route('tour.transportation.create', $tour->id) }}"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
-                    Transportasi</a>
-
-                <!-- Tombol untuk membuka modal transportasi -->
-                <button onclick="document.getElementById('importTransportModal').classList.remove('hidden')"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
-                    Import Transportasi
-                </button>
-            </div>
-        </div>
-
-        <!-- Modal untuk Import Transportasi -->
-        <x-ui.modal.import-modal id="importTransportModal" title="Import Transportasi"
-            action-url="{{ route('tour.transportation.import', $tour->id) }}" method="POST" />
-
-
-        <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
-        <x-ui.flash-message :message="session('error')" type="error" id="toast-error" />
-
-        <!-- Table -->
-        <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
-            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
-                <thead>
-                    <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
-                        <th class="px-6 py-3">No</th>
-                        <th class="px-6 py-3">Armada</th>
-                        <th class="px-6 py-3">Slug</th>
-                        <th class="px-6 py-3">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($transportation->isEmpty())
-                        <tr>
-                            <td colspan="6" class="text-center">Tidak ada data</td>
-                        </tr>
-                    @else
-                        @foreach ($transportation as $t)
-                            <tr class="border-dashed border-t border-gray-200">
-                                <td class="p-2">{{ $loop->iteration }}</td>
-                                <td class="p-2">{{ $t->transportation_name }}</td>
-                                <td class="p-2">{{ $t->slug }}</td>
-
-                                <td class="p-2">
-                                    <div class="flex justify-evenly">
-                                        <a href="{{ route('tour.transportation.edit', [$tour->id, $t->id]) }}">Edit</a>
-                                        <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}"
-                                            data-transportation-id="{{ $t->id }}">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-
 
     <section>
         <div class="flex justify-between items-center mt-6">
@@ -193,7 +204,8 @@
 
         <!-- Table -->
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px] mt-4">
-            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+            <table
+                class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
                 <thead>
                     <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
                         <th class="px-6 py-3">No</th>
@@ -223,11 +235,16 @@
                                 <td class="p-2">{{ $r->activity }}</td>
                                 <td class="p-2">{{ $r->description }}</td>
                                 <td class="p-2">
-                                    <div class="flex justify-evenly">
+                                    <div class="flex gap-4 justify-center">
                                         <a href="{{ route('tour.rundown.edit', [$tour->id, $r->id]) }}"
-                                            class="text-blue-500">Edit</a>
-                                        <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}"
-                                            data-rundown-id="{{ $r->id }}">Delete</button>
+                                            class="bg-blue-500 icon-function">
+                                            <x-icons.icon type="trash" fill="#fff" width="20"
+                                                height="20" />
+                                        </a>
+                                        <button class="bg-red-500 icon-function" data-id="{{ $tour->id }}"
+                                            data-rundown-id="{{ $r->id }}"> <x-icons.icon type="trash"
+                                                fill="#fff" width="20" height="20" />
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -264,55 +281,55 @@
         </div>
     </div>
 
-@endsection
 
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('modal');
-            const deleteForm = document.getElementById('delete-form');
-            const cancelBtn = document.getElementById('cancel-btn');
-            const deleteButtons = document.querySelectorAll('.delete-btn');
+    @section('script')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('modal');
+                const deleteForm = document.getElementById('delete-form');
+                const cancelBtn = document.getElementById('cancel-btn');
+                const deleteButtons = document.querySelectorAll('.delete-btn');
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const tourId = this.getAttribute('data-id');
-                    let entityId; // Variable untuk menyimpan id yang akan dihapus
-                    let url; // Variable untuk menyimpan url
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const tourId = this.getAttribute('data-id');
+                        let entityId; // Variable untuk menyimpan id yang akan dihapus
+                        let url; // Variable untuk menyimpan url
 
-                    // Memeriksa apakah tombol adalah untuk transportasi atau hotel
-                    if (this.hasAttribute('data-transportation-id')) {
-                        entityId = this.getAttribute('data-transportation-id');
-                        url = `/admin/tour/${tourId}/transportation/${entityId}`;
-                    } else if (this.hasAttribute('data-hotel-id')) {
-                        entityId = this.getAttribute('data-hotel-id');
-                        url = `/admin/tour/${tourId}/hotel/${entityId}`; // Update URL untuk hotel
-                    } else if (this.hasAttribute('data-rundown-id')) {
-                        entityId = this.getAttribute('data-rundown-id');
-                        url =
-                            `/admin/tour/${tourId}/rundown/${entityId}`; // Update URL untuk rundown
-                    } else if (this.hasAttribute('data-participant-id')) {
-                        entityId = this.getAttribute('data-participant-id');
-                        url =
-                            `/admin/tour/${tourId}/participant/${entityId}`; // Update URL untuk participant
+                        // Memeriksa apakah tombol adalah untuk transportasi atau hotel
+                        if (this.hasAttribute('data-transportation-id')) {
+                            entityId = this.getAttribute('data-transportation-id');
+                            url = `/admin/tour/${tourId}/transportation/${entityId}`;
+                        } else if (this.hasAttribute('data-hotel-id')) {
+                            entityId = this.getAttribute('data-hotel-id');
+                            url = `/admin/tour/${tourId}/hotel/${entityId}`; // Update URL untuk hotel
+                        } else if (this.hasAttribute('data-rundown-id')) {
+                            entityId = this.getAttribute('data-rundown-id');
+                            url =
+                                `/admin/tour/${tourId}/rundown/${entityId}`; // Update URL untuk rundown
+                        } else if (this.hasAttribute('data-participant-id')) {
+                            entityId = this.getAttribute('data-participant-id');
+                            url =
+                                `/admin/tour/${tourId}/participant/${entityId}`; // Update URL untuk participant
+                        }
+
+                        deleteForm.setAttribute('action', url);
+                        modal.classList.remove('hidden');
+                        modal.classList.add('flex');
+                    });
+                });
+
+                cancelBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                });
+
+                window.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        modal.classList.add('hidden');
                     }
-
-                    deleteForm.setAttribute('action', url);
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
                 });
             });
-
-            cancelBtn.addEventListener('click', function() {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.classList.add('hidden');
-                }
-            });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
+</x-backend-layout>

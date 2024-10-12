@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <h1>Edit Transportasi</h1>
 
     @if (session('success'))
@@ -22,4 +20,4 @@
             <button type="submit" class="button-primary w-[20%]">Update Transportasi</button>
         </div>
     </form>
-@endsection
+</x-backend-layout>

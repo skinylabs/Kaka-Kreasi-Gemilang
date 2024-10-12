@@ -14,25 +14,36 @@ class PageInfoController extends Controller
     // Method untuk menampilkan detail tour berdasarkan slug
     public function index()
     {
-
         // Kirim data tour ke view
-        return view('pages.information.index', [
-
-            // Jika Anda menggunakan title di view
-        ]);
+        return view('pages.information.index');
     }
-    public function show($slug)
+
+    public function show(Request $request, $slug)
     {
+        // Periksa apakah pengguna telah login
+        if ($request->session()->has('logged_in') && $request->session()->get('logged_in') === true) {
+            // Ambil slug tour dari session
+            $loggedTourSlug = $request->session()->get('tour_slug');
+
+            // Cek apakah slug tour yang diminta sesuai dengan slug yang disimpan di session
+            if ($loggedTourSlug !== null && $slug !== $loggedTourSlug) {
+                // Logout pengguna
+                $request->session()->forget(['logged_in', 'tour_slug']);
+
+                // Redirect ke halaman informasi tour dengan pesan error
+                return redirect()->route('tour.info')->withErrors(['message' => 'Anda tidak memiliki akses ke tour ini.']);
+            }
+        }
+
         // Ambil data tour berdasarkan slug
         $tour = Tour::where('slug', $slug)->firstOrFail();
 
         // Kirim data tour ke view
         return view('pages.information.show', [
             'tour' => $tour,
-            'title' => $tour->name, // Jika Anda menggunakan title di view
+            'title' => $tour->name,
         ]);
     }
-
 
     public function transportation($slug, Request $request)
     {
@@ -48,7 +59,7 @@ class PageInfoController extends Controller
             $query->where('name', 'like', "%{$search}%");
         }
 
-        $participants = $query->get(); // Ambil data peserta setelah filter->get();
+        $participants = $query->get();
         $transportation = Transportation::where('tour_id', $tour->id)->get();
 
         // Menyimpan status kolom
@@ -69,29 +80,13 @@ class PageInfoController extends Controller
             'hasGroup' => $hasGroup,
             'hasTransportation' => $hasTransportation,
             'hasRoomCode' => $hasRoomCode,
-            'search' => $search, // Tambahkan ini untuk mengirimkan nilai pencarian ke view
+            'search' => $search,
         ]);
     }
 
-
-
-    // public function hotel($slug)
-    // {
-    //     // Ambil data 
-    //     $tour = Tour::where('slug', $slug)->firstOrFail();
-    //     $hotel = hotel::where('tour_id', $tour->id)->get();
-    //     // Mengirim data ke view
-    //     return view('pages.information.rundown', [
-    //         'tour' => $tour,
-    //         'slug' => $slug,
-    //         'hotel' => $hotel,
-    //         'title' => $tour->name, // Mengatur title dari controller
-    //     ]);
-    // }
-
     public function rundown($slug)
     {
-        // Ambil data 
+        // Ambil data
         $tour = Tour::where('slug', $slug)->firstOrFail();
         $rundown = Rundown::where('tour_id', $tour->id)->get();
 
@@ -108,7 +103,7 @@ class PageInfoController extends Controller
             'tour' => $tour,
             'slug' => $slug,
             'rundown' => $rundown,
-            'title' => $tour->name, // Mengatur title dari controller
+            'title' => $tour->name,
             'hasDate' => $hasDate,
             'hasTime' => $hasTime,
             'hasActivity' => $hasActivity,

@@ -1,5 +1,5 @@
-<x-app-layout>
+<x-backend-layout>
 
     Dashboard
 
-</x-app-layout>
+</x-backend-layout>

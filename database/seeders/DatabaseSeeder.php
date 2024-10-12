@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'tour-1',
             'start_date' => '2025-01-01',
             'end_date' => '2025-01-02',
-            'security_password' => Hash::make('123'),
+            'security_password' =>  bcrypt('123'),
         ]);
 
         Tour::create([
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             'slug' => 'tour-2',
             'start_date' => '2025-01-01',
             'end_date' => '2025-01-02',
-            'security_password' => Hash::make('321'),
+            'security_password' =>  bcrypt('321'),
         ]);
     }
 }

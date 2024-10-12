@@ -21,9 +21,13 @@ Route::get('/', function () {
 
 
 
-// Route untuk Login pengguna biasa
+// Halaman informasi umum (belum login)
 Route::get('/information', [PageInfoController::class, 'index'])->name('tour.info');
+
+// Login menggunakan kode/password
 Route::post('/check-password', [InfoAuthController::class, 'checkPassword'])->name('tour.checkPassword');
+
+
 
 // Route untuk pengguna biasa
 Route::middleware(['user'])->group(function () {
@@ -32,11 +36,13 @@ Route::middleware(['user'])->group(function () {
         Route::get('/{slug}/transportation', [PageInfoController::class, 'transportation'])->name('transportation');
         Route::get('/{slug}/hotel', [PageInfoController::class, 'hotel'])->name('hotel');
         Route::get('/{slug}/rundown', [PageInfoController::class, 'rundown'])->name('rundown');
+        // Logout route
+        Route::post('/logout', [InfoAuthController::class, 'logout'])->name('tour.logout');
     });
 });
 
 // Route untuk admin
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

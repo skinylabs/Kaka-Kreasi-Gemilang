@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-semibold text-slate-800">Tambah Participant</h1>
@@ -13,7 +11,8 @@
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
-                        <a href="/tours" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
+                        <a href="/tours"
+                            class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
@@ -80,4 +79,4 @@
             </div>
         </div>
     </form>
-@endsection
+</x-backend-layout>

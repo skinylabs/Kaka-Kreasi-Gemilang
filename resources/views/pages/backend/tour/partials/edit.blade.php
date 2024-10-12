@@ -1,6 +1,4 @@
-@extends('pages.backend.app')
-
-@section('content')
+<x-backend-layout>
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-semibold text-slate-800">Edit Tour</h1>
@@ -13,7 +11,8 @@
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
-                        <a href="/tours" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
+                        <a href="/tours"
+                            class="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tours</a>
                         <p class="ml-2">/</p>
                     </li>
                     <li class="flex items-center">
@@ -31,18 +30,20 @@
 
             <div>
                 <label for="name" class="label">Tour Name:</label>
-                <input type="text" name="name" id="name" class="textInput" value="{{ $tour->name }}" required>
+                <input type="text" name="name" id="name" class="textInput" value="{{ $tour->name }}"
+                    required>
             </div>
 
             <div>
                 <label for="client" class="label">Client Name:</label>
-                <input type="text" name="client" id="client" class="textInput" value="{{ $tour->client }}" required>
+                <input type="text" name="client" id="client" class="textInput" value="{{ $tour->client }}"
+                    required>
             </div>
 
             <div>
                 <label for="start_date" class="label">Start Date:</label>
-                <input type="date" name="start_date" id="start_date" class="textInput" value="{{ $tour->start_date }}"
-                    required>
+                <input type="date" name="start_date" id="start_date" class="textInput"
+                    value="{{ $tour->start_date }}" required>
             </div>
 
             <div>
@@ -89,70 +90,71 @@
             </div>
         </div>
     </form>
-@endsection
 
-@section('script')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const customSelect = document.getElementById("custom-select");
-            const optionsContainer = document.getElementById("options");
-            const selectedUser = document.getElementById("selected-user");
-            const hiddenInput = document.getElementById("user_id");
 
-            customSelect.addEventListener("click", function() {
-                optionsContainer.classList.toggle("hidden");
+    @section('script')
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const customSelect = document.getElementById("custom-select");
+                const optionsContainer = document.getElementById("options");
+                const selectedUser = document.getElementById("selected-user");
+                const hiddenInput = document.getElementById("user_id");
+
+                customSelect.addEventListener("click", function() {
+                    optionsContainer.classList.toggle("hidden");
+                });
+
+                optionsContainer.addEventListener("click", function(event) {
+                    const value = event.target.dataset.value;
+                    const name = event.target.innerText;
+
+                    if (value) {
+                        selectedUser.innerText = name;
+                        hiddenInput.value = value;
+                    }
+
+                    optionsContainer.classList.add("hidden");
+                });
+
+                // Prevent form submit if user is not selected
+                document.querySelector("form").addEventListener("submit", function(event) {
+                    if (!hiddenInput.value) {
+                        alert('Please select a user.');
+                        event.preventDefault(); // Stop form from submitting
+                    }
+                });
             });
 
-            optionsContainer.addEventListener("click", function(event) {
-                const value = event.target.dataset.value;
-                const name = event.target.innerText;
+            document.addEventListener("DOMContentLoaded", function() {
+                const customTataTertibSelect = document.getElementById("custom-tata-tertib-select");
+                const tataTertibOptionsContainer = document.getElementById("tata-tertib-options");
+                const selectedTataTertib = document.getElementById("selected-tata-tertib");
+                const hiddenTataTertibInput = document.getElementById("tata_tertib_id");
 
-                if (value) {
-                    selectedUser.innerText = name;
-                    hiddenInput.value = value;
-                }
+                customTataTertibSelect.addEventListener("click", function() {
+                    tataTertibOptionsContainer.classList.toggle("hidden");
+                });
 
-                optionsContainer.classList.add("hidden");
+                tataTertibOptionsContainer.addEventListener("click", function(event) {
+                    const value = event.target.dataset.value;
+                    const name = event.target.innerText;
+
+                    if (value) {
+                        selectedTataTertib.innerText = name;
+                        hiddenTataTertibInput.value = value;
+                    }
+
+                    tataTertibOptionsContainer.classList.add("hidden");
+                });
+
+                // Optional: validasi jika diperlukan
+                document.querySelector("form").addEventListener("submit", function(event) {
+                    if (!hiddenTataTertibInput.value) {
+                        alert('Please select a Tata Tertib.');
+                        event.preventDefault(); // Stop form from submitting
+                    }
+                });
             });
-
-            // Prevent form submit if user is not selected
-            document.querySelector("form").addEventListener("submit", function(event) {
-                if (!hiddenInput.value) {
-                    alert('Please select a user.');
-                    event.preventDefault(); // Stop form from submitting
-                }
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const customTataTertibSelect = document.getElementById("custom-tata-tertib-select");
-            const tataTertibOptionsContainer = document.getElementById("tata-tertib-options");
-            const selectedTataTertib = document.getElementById("selected-tata-tertib");
-            const hiddenTataTertibInput = document.getElementById("tata_tertib_id");
-
-            customTataTertibSelect.addEventListener("click", function() {
-                tataTertibOptionsContainer.classList.toggle("hidden");
-            });
-
-            tataTertibOptionsContainer.addEventListener("click", function(event) {
-                const value = event.target.dataset.value;
-                const name = event.target.innerText;
-
-                if (value) {
-                    selectedTataTertib.innerText = name;
-                    hiddenTataTertibInput.value = value;
-                }
-
-                tataTertibOptionsContainer.classList.add("hidden");
-            });
-
-            // Optional: validasi jika diperlukan
-            document.querySelector("form").addEventListener("submit", function(event) {
-                if (!hiddenTataTertibInput.value) {
-                    alert('Please select a Tata Tertib.');
-                    event.preventDefault(); // Stop form from submitting
-                }
-            });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
+</x-backend-layout>

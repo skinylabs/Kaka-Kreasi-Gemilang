@@ -1,5 +1,4 @@
-@extends('pages.backend.app')
-@section('content')
+<x-backend-layout>
     <div class="w-full flex flex-col gap-4">
         <div class="flex justify-between items-center">
             <div>
@@ -8,7 +7,8 @@
                 <div class="text-sm sm:text-base ">
                     <ol class="list-none p-0 inline-flex space-x-2">
                         <li class="flex items-center">
-                            <a href="/tour" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">KAKA
+                            <a href="/tour"
+                                class="text-gray-600 hover:text-blue-500 transition-colors duration-300">KAKA
                                 TOUR</a>
                             <p class="ml-2">/</p>
                         </li>
@@ -23,7 +23,8 @@
         </div>
 
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px]">
-            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+            <table
+                class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
                 <thead>
                     <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
                         <th class="px-6 py-3 ">
@@ -63,10 +64,16 @@
                             <td>{{ $tour->tatatertib->title }}</td>
                             <td class="p-2">{{ $tour->user->name }}</td>
                             <td class="p-2">
-                                <div class="flex justify-evenly">
-                                    <a href="{{ route('tour.show', $tour->id) }}">View</a>
-                                    <a href="{{ route('tour.edit', $tour->id) }}">Edit</a>
-                                    <button class="text-red-500 delete-btn" data-id="{{ $tour->id }}">Delete</button>
+                                <div class="flex gap-4 justify-center">
+                                    <a href="{{ route('tour.show', $tour->id) }}" class="bg-yellow-500 icon-function">
+                                        <x-icons.icon type="eye" fill="#fff" width="20" height="20" />
+                                    </a>
+                                    <a href="{{ route('tour.edit', $tour->id) }}" class="bg-blue-500 icon-function">
+                                        <x-icons.icon type="edit" fill="#fff" width="20" height="20" />
+                                    </a>
+                                    <button class="bg-red-500 icon-function" data-id="{{ $tour->id }}">
+                                        <x-icons.icon type="trash" fill="#fff" width="20" height="20" />
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -91,41 +98,41 @@
         </div>
     </div>
 
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get modal elements
-            const modal = document.getElementById('modal');
-            const deleteForm = document.getElementById('delete-form');
-            const cancelBtn = document.getElementById('cancel-btn');
+    @section('script')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get modal elements
+                const modal = document.getElementById('modal');
+                const deleteForm = document.getElementById('delete-form');
+                const cancelBtn = document.getElementById('cancel-btn');
 
-            // Handle delete button click
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const tourId = this.getAttribute('data-id');
-                    // Set form action to the correct route
-                    deleteForm.setAttribute('action', `/admin/tour/${tourId}`);
-                    // Show the modal
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
+                // Handle delete button click
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const tourId = this.getAttribute('data-id');
+                        // Set form action to the correct route
+                        deleteForm.setAttribute('action', `/admin/tour/${tourId}`);
+                        // Show the modal
+                        modal.classList.remove('hidden');
+                        modal.classList.add('flex');
+                    });
+                });
+
+                // Handle cancel button click
+                cancelBtn.addEventListener('click', function() {
+                    // Hide the modal
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                });
+
+                // Close modal when clicking outside the modal content
+                window.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        modal.classList.add('hidden');
+                    }
                 });
             });
-
-            // Handle cancel button click
-            cancelBtn.addEventListener('click', function() {
-                // Hide the modal
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            });
-
-            // Close modal when clicking outside the modal content
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.classList.add('hidden');
-                }
-            });
-        });
-    </script>
-@endsection
-@endsection
+        </script>
+    @endsection
+</x-backend-layout>
