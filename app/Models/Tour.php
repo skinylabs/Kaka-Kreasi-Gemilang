@@ -9,7 +9,7 @@ class Tour extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'client', 'slug', 'start_date', 'end_date', 'tata_tertib_id', 'user_id'];
+    protected $fillable = ['name', 'client', 'slug', 'start_date', 'end_date', 'tata_tertib_id', 'user_id', 'security_password'];
 
     // Sebelum menyimpan model, buat slug dari nama
     protected static function boot()

@@ -49,6 +49,8 @@ class TourController extends Controller
             'security_password' => 'required|string|max:255',
         ]);
 
+        // dd($request->all());
+
         $tour = Tour::create([
             'name' => $request->name,
             'client' => $request->client,

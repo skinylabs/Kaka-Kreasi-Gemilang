@@ -19,12 +19,11 @@ class AdminMiddleware
         // Memeriksa apakah user sudah login
         if (Auth::check()) {
             // Memeriksa apakah user memiliki role yang sesuai
-            if (Auth::user()->role == 'admin') {
-                return $next($request); // Lanjutkan ke halaman berikutnya
+            if (Auth::user()->role != 'admin') {
+                // Jika role tidak sesuai, redirect ke halaman lain atau tampilkan pesan error
+                return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
             }
         }
-
-        // Jika role tidak sesuai, redirect ke halaman lain atau tampilkan pesan error
-        return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        return $next($request); // Lanjutkan ke halaman berikutnya
     }
 }

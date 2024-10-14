@@ -1,11 +1,11 @@
-@extends('pages.information.app')
+@extends('layouts.information')
 @section('content')
 @section('content')
     <section class="flex flex-col gap-6">
         <div class="text-center">
-            <h1 class="text-2xl font-bold text-slate-800">
+            <h2 class="text-2xl font-bold text-slate-800">
                 {{ $tour->name }}
-            </h1>
+            </h2>
             <p class="font-bold text-slate-600">
                 {{ $tour->client }}
             </p>
@@ -64,29 +64,27 @@
                     Rundown
                 </h1>
             </a>
-            {{-- <a href="{{ route('hotel', ['slug' => $tour->slug]) }}"
-                class="block relative w-full h-32 overflow-hidden rounded-xl">
-                <img src="{{ asset('images/barcode/hotel.webp') }}" alt="" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black opacity-50"></div>
-                <h1
-                    class="absolute inset-0 flex items-center justify-center text-white font-bold text-xl uppercase text-center">
-                    Hotel
-                </h1>
-            </a>
-            <a href="{{ route('transportation', ['slug' => $tour->slug]) }}"
-                class="block relative w-full h-32 overflow-hidden rounded-xl">
-                <img src="{{ asset('images/barcode/tatib.webp') }}" alt="" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black opacity-50"></div>
-                <h1
-                    class="absolute inset-0 flex items-center justify-center text-white font-bold text-xl uppercase text-center">
-                    Tata Tertib
-                </h1>
-            </a> --}}
+
         </div>
     </section>
 
 
-    <style>
-
-    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const slider = tns({
+                container: ".my-slider", // Ganti dengan selector yang sesuai
+                items: 1,
+                slideBy: "page",
+                autoplay: true, // Aktifkan autoplay
+                speed: 300,
+                nav: false, // Tampilkan navigasi (tombol prev/next)
+                controls: true, // Tampilkan kontrol (tombol prev/next)
+                controlsText: [
+                    `<ion-icon name="chevron-back-outline"></ion-icon>`,
+                    `<ion-icon name="chevron-forward-outline"></ion-icon>`,
+                ],
+                autoplayButtonOutput: false,
+            });
+        });
+    </script>
 @endsection

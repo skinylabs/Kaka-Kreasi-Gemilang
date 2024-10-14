@@ -79,7 +79,15 @@
                 </div>
             </div>
             <input type="hidden" name="user_id" id="user_id">
-
+            <div>
+                <label for="security_password" class="label">Pass Code:</label>
+                <div class="relative">
+                    <input type="password" name="security_password" id="security_password" class="textInput" required>
+                    <span toggle="#security_password" class="absolute right-3 top-3 cursor-pointer" id="togglePassword">
+                        👁️
+                    </span>
+                </div>
+            </div>
             <div class="flex justify-end">
                 <button type="submit" class="button-primary w-[20%]">Create Tour</button>
             </div>
@@ -90,6 +98,17 @@
     @section('script')
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                const togglePassword = document.getElementById("togglePassword");
+                const passwordInput = document.getElementById("security_password");
+
+                togglePassword.addEventListener("click", function() {
+                    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                    passwordInput.setAttribute("type", type);
+
+                    // Ubah ikon mata
+                    this.innerText = type === "password" ? "👁️" : "🙈";
+                });
+
                 const customSelect = document.getElementById("custom-select");
                 const optionsContainer = document.getElementById("options");
                 const selectedUser = document.getElementById("selected-user");
