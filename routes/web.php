@@ -15,7 +15,7 @@ use App\Http\Controllers\Backend\Tour\TransportationController;
 use App\Http\Controllers\Information\PageInfoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.frontend.homepage');
 });
 
 

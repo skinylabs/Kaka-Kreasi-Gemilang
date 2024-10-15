@@ -76,19 +76,27 @@
     @apply absolute block h-[1px] bg-gray-900 left-0 -bottom-1 w-0 group-hover:w-full transition-all duration-300;
 }
 
-/* Gaya untuk tombol prev dan next index*/
+/* Gaya untuk tombol prev dan next index */
+.home-slider {
+    @apply relative; /* Pastikan kontainer slider memiliki posisi relative */
+}
+
 .tns-controls {
-    @apply relative top-[80px] flex justify-between items-center z-10 overflow-visible;
+    @apply absolute top-1/2 left-0 right-0 flex justify-between items-center z-10; /* Posisikan kontrol di tengah */
+    transform: translateY(-50%); /* Memindahkan kontrol ke tengah vertikal */
+}
+
+.tns-controls button {
+    @apply bg-white text-slate-700 rounded-full p-2 h-8 w-8 flex items-center justify-center shadow-lg transition-all duration-300; /* Tambahkan bayangan untuk efek */
 }
 
 .tns-controls button[data-controls="prev"] {
-    @apply absolute bg-white text-slate-700 rounded-full p-2 h-8 w-8 flex items-center text-center -left-3;
+    @apply -left-4; /* Tombol prev di kiri */
 }
 
 .tns-controls button[data-controls="next"] {
-    @apply absolute bg-white text-slate-700 rounded-full p-2 h-8 w-8 flex items-center text-center -right-3;
+    @apply -right-4; /* Tombol next di kanan */
 }
-
 .icon-function {
     @apply p-2 rounded-md transition-all ease-in-out duration-300 hover:scale-110;
 }
