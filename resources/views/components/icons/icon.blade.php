@@ -55,6 +55,21 @@
         </svg>
     @break
 
+    @case('bg-testimoni')
+        <svg width="2850" height="1391" viewBox="0 0 2850 1391" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path opacity="0.25"
+                d="M0.594606 1268.42C-2.93152 1240.21 29.3517 829.888 189.464 496.423C333.171 197.521 645.89 38.0224 994.952 274.131C1368.96 527.175 1698.74 566.364 1968.16 510.354C2234.07 454.767 2417.29 258.206 2501.13 131.314C2683.04 -142.864 2928.05 43.5462 2824.65 410.681C2775.96 581.435 2663.92 624.545 2472.4 633.492C2272.21 642.844 1979.15 589.22 1567.21 651.032C1169.92 710.951 718.823 878.514 459.8 1106.63C184.128 1349.61 29.721 1514.46 0.594606 1268.42Z"
+                fill="url(#paint0_linear_85_57)" />
+            <defs>
+                <linearGradient id="paint0_linear_85_57" x1="2666.58" y1="1171.34" x2="87.2412" y2="272.063"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#5D50C6" />
+                    <stop offset="1" stop-color="#F85E9F" />
+                </linearGradient>
+            </defs>
+        </svg>
+    @break
+
     @default
         <!-- Default Icon or Fallback -->
         <svg fill="{{ $fill }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

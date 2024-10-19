@@ -32,3 +32,16 @@ const productSwiper = new Swiper("#productSwiper", {
         clickable: true,
     },
 });
+
+const swiper = new Swiper(".swiper-container", {
+    modules: [Autoplay, Pagination],
+    loop: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+});
