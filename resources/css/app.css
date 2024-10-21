@@ -89,6 +89,14 @@
     @apply bg-white opacity-50 text-slate-800  items-center justify-center rounded-full absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer z-10 hidden md:flex md:h-8 md:w-8;
 }
 
+.testimonial-swiper-button-prev {
+    @apply bg-blue-500 w-6 h-6 text-white flex  items-center justify-center rounded-full absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer z-10  md:flex md:h-8 md:w-8;
+}
+
+.testimonial-swiper-button-next {
+    @apply bg-blue-500 w-6 h-6 text-white flex  items-center justify-center rounded-full absolute top-1/2 left-4 -translate-y-1/2 cursor-pointer z-10  md:flex md:h-8 md:w-8;
+}
+
 /* From Uiverse.io by alexmaracinaru */
 .cta {
     position: relative;

@@ -1,5 +1,5 @@
 <x-frontend-layout>
-    <section class="swiper ">
+    <section class="swiper " id="homepageSwiper">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
@@ -30,17 +30,17 @@
         </div>
     </section>
 
-    <section class="mt-8 ">
+    <section class="mt-8">
         <div class="flex justify-between items-center">
-            <div class="">
+            <div>
                 <p class="text-pink-500 font-semibold">WISATA TERBAIK</p>
                 <h1 class="text-2xl font-bold">Mulai Perjalanan Anda</h1>
             </div>
+
             <!-- Tombol untuk Mobile -->
-            <button
-                class="relative block w-14 h-14 mx-0 overflow-hidden outline-none bg-transparent cursor-pointer border-0 md:hidden">
+            <button class="relative block w-14 h-14 mx-0 overflow-hidden bg-transparent border-0 md:hidden">
                 <div class="absolute top-0 left-0 flex animate-pulse">
-                    <span class="block w-5 h-5 mx-4 mt-4 transform rotate-180 fill-blue-500 animate-arrow">
+                    <span class="block w-5 h-5 mx-4 mt-4 transform rotate-180 fill-blue-500">
                         <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
@@ -59,33 +59,30 @@
                     <polyline points="8 1 12 5 8 9" class="stroke-blue-500"></polyline>
                 </svg>
             </button>
-
         </div>
 
         <div class="swiper mySwiper mt-4" id="productSwiper">
             <div class="swiper-wrapper">
                 @for ($i = 0; $i < 10; $i++)
-                    <div class="swiper-slide w-60 h-80 bg-gray-50 p-3 flex flex-col gap-1 rounded-2xl">
-                        <div class="h-48 bg-gray-700 rounded-xl">
-                            <img src="{{ asset('images/carousel/bali1.webp') }}" alt="Long Chair"
-                                class="w-full h-full object-cover overflow-hidden rounded-lg">
+                    <a href="#" class="swiper-slide overflow-visible">
+                        <div class="relative -mr-6 hover:scale-105 transition-all duration-300 ease-in-out">
+                            <!-- H1 di pojok kiri atas -->
+                            <h1
+                                class="absolute top-2 left-2 text-white font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
+                                Bali</h1>
+                            <img src="{{ asset('images/carousel/bali1.webp') }}" alt="Image {{ $i + 1 }}"
+                                class="rounded-lg w-full h-auto" />
+                            <!-- Rating di pojok kanan bawah -->
+                            <div
+                                class="absolute bottom-2 right-2 text-yellow-500 font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
+                                ★★★★★</div>
                         </div>
-                        <div class="flex flex-col gap-4">
-                            <div class="flex flex-row justify-between">
-                                <div class="flex flex-col">
-                                    <span class="text-xl font-bold">Long Chair</span>
-                                    <p class="text-xs text-gray-700">ID: 23432252</p>
-                                </div>
-                                <span class="font-bold text-red-600">$25.99</span>
-                            </div>
-                            <button class="hover:bg-sky-700 text-gray-50 bg-sky-800 py-2 rounded-md">Add to
-                                cart</button>
-                        </div>
-                    </div>
+                    </a>
                 @endfor
             </div>
         </div>
     </section>
+
     <section class="relative flex flex-col justify-center items-center mt-8">
         <!-- Gambar -->
         <div class="flex flex-col items-center justify-center gap-6 md:flex-row md:text-left md:gap-8">
@@ -98,7 +95,7 @@
                     pengalaman
                     liburan yang tak terlupakan.</p>
             </div>
-            <div class="flex justify-center items-center ">
+            <div class="w-full ">
 
                 <div class="grid grid-cols-2 gap-4 text-center">
                     <div class="border border-gray-300 p-2 rounded-lg  w-full">
@@ -117,11 +114,6 @@
                         <h1>100</h1>
                         <p class="text-sm">Luxury Hotel</p>
                     </div>
-                </div>
-                <!-- Gambar -->
-                <div class="">
-                    <img src="{{ asset('images/girl-sparcle.webp') }}" alt="Girl Sparkle"
-                        class="w-48 h-auto object-cover rounded-lg md:w-64" />
                 </div>
             </div>
 
@@ -177,8 +169,7 @@
                     <!-- Ini akan mencegah penutupan modal saat klik di bagian dalam modal -->
 
                     <!-- Tombol Close (X) di pojok kanan atas -->
-                    <button @click="openModal = false"
-                        class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <button @click="openModal = false" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -197,48 +188,83 @@
             </div>
         </div>
     </section>
-    <section class="flex flex-col  mt-8 mx-0">
-        <!-- Teks -->
-        <div class="md:w-1/2">
+    <section class="mt-8">
+        <div class="md:w-1/2 mb-4">
             <p class="text-pink-500 font-semibold">TESTIMONI</p>
             <h1 class="text-2xl font-bold">Apa Kata Mereka?</h1>
         </div>
 
-        <!-- Testimoni Slider -->
-        <div id="homepageSwiper" class="swiper-container w-full relative">
-            <div class="flex justify-center scale-150">
-                <x-icons.icon type="bg-testimoni"
-                    class="absolute inset-0 w-full h-full object-cover z-0 opacity-30" />
+        <!-- Swiper Slider untuk Testimoni -->
+        <div class="swiper testimonialSwiper" id="testimonialSwiper">
+            <div class="swiper-wrapper">
 
-            </div>
-
-            <div class="swiper-wrapper z-10 relative">
                 <!-- Slide 1 -->
-                @for ($i = 0; $i < 10; $i++)
-                    <div class="swiper-slide flex flex-col items-center text-center p-4">
-                        <div class="w-full flex justify-center items-center">
-                            <div
-                                class="profile-photo w-20 h-20 rounded-full overflow-hidden mb-4 flex items-center justify-center">
-                                <img src="https://randomuser.me/api/portraits/men/{{ $i }}.jpg"
-                                    alt="Profil {{ $i + 1 }}" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        <div class="profile-name text-lg font-bold mb-2">John Doe {{ $i + 1 }}</div>
-                        <div class="star-rating text-yellow-500 mb-2">
-                            &#9733; &#9733; &#9733; &#9733; &#9733;
-                        </div>
-                        <div class="testimony-text text-gray-600">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        </div>
+                <div class="swiper-slide flex flex-col items-center text-center">
+                    <div class="w-full flex justify-center">
+                        <img src="{{ asset('images/testimonials/profile1.jpg') }}" alt="Profile 1"
+                            class="w-16 h-16 rounded-full object-cover mb-4">
                     </div>
-                @endfor
+                    <h2 class="font-semibold text-lg">John Doe</h2>
+                    <div class="flex items-center justify-center mt-2 mb-4 text-yellow-500">
+                        <span>★★★★★</span>
+                    </div>
+                    <p class="text-gray-500 italic">"Layanan sangat baik dan pengalaman wisata yang luar biasa!"</p>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="swiper-slide flex flex-col items-center text-center">
+                    <div class="w-full flex justify-center">
+                        <img src="{{ asset('images/testimonials/profile2.jpg') }}" alt="Profile 2"
+                            class="w-16 h-16 rounded-full object-cover mb-4">
+                    </div>
+                    <h2 class="font-semibold text-lg">Jane Smith</h2>
+                    <div class="flex items-center justify-center mt-2 mb-4 text-yellow-500">
+                        <span>★★★★☆</span>
+                    </div>
+                    <p class="text-gray-500 italic">"Sangat puas dengan fasilitas dan pelayanan tur ini!"</p>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="swiper-slide flex flex-col items-center text-center">
+                    <div class="w-full flex justify-center">
+                        <img src="{{ asset('images/testimonials/profile3.jpg') }}" alt="Profile 3"
+                            class="w-16 h-16 rounded-full object-cover mb-4">
+                    </div>
+                    <h2 class="font-semibold text-lg">Sarah Lee</h2>
+                    <div class="flex items-center justify-center mt-2 mb-4 text-yellow-500">
+                        <span>★★★★★</span>
+                    </div>
+                    <p class="text-gray-500 italic">"Pengalaman yang tidak akan terlupakan!"</p>
+                </div>
+
             </div>
 
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
+            <!-- Navigation -->
+
+            <div class="testimonial-swiper-button-next">
+                <ion-icon name="chevron-back-outline" class="text-lg"></ion-icon>
+            </div>
+            <div class="testimonial-swiper-button-prev">
+                <ion-icon name="chevron-forward-outline" class="text-lg"></ion-icon>
+            </div>
+
         </div>
+    </section>
+    <section class="flex flex-col  mt-8 mx-0">
+        <div class="bg-gradient-to-r from-[#EC4899] to-[#FDE047] p-4 rounded-lg text-white text-center">
+            <h1 class="text-xl font-bold">
+                Ingin tau lebih tentang kami?
+            </h1>
+            <p class="text-xs ">
+                Segera hubungi kami dan akan kami bantu sepenuh hati
+            </p>
+            <a href="#" class="w-full flex justify-center">
+                <div class="m-2 text-pink-500 bg-white p-2 rounded-lg w-[50%] font-bold">
+                    Hubungi Kami
+                </div>
+            </a>
 
-
+        </div>
     </section>
 
     @vite('resources/js/swiper/init/homepage.js')

@@ -33,15 +33,15 @@ const productSwiper = new Swiper("#productSwiper", {
     },
 });
 
-const swiper = new Swiper(".swiper-container", {
-    modules: [Autoplay, Pagination],
+const testimonialSwiper = new Swiper("#testimonialSwiper", {
+    modules: [Navigation, Autoplay],
     loop: true,
     autoplay: {
         delay: 3000,
         disableOnInteraction: false,
     },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
+    navigation: {
+        nextEl: ".testimonial-swiper-button-next",
+        prevEl: ".testimonial-swiper-button-prev",
     },
 });

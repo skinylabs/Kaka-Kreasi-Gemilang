@@ -16,11 +16,11 @@
 <body>
     <x-layouts.frontend-navbar />
 
-    <main class="pt-4 px-4 ">
+    <main class="pt-16 px-4 ">
         {{ $slot }}
     </main>
 
-
+    <x-layouts.frontend-footer />
 
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
