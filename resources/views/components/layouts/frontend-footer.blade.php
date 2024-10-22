@@ -44,13 +44,13 @@
         </div>
 
         <!-- Company Description -->
-        <p class="text-xs text-center">
+        <p class="text-xs text-center hidden md:block">
             PT. Kakakreasigemilang adalah perusahaan yang bergerak di bidang tour and travel, menyediakan layanan
             perjalanan berkualitas dengan komitmen untuk memberikan pengalaman liburan yang nyaman, aman, dan tak
             terlupakan.
         </p>
     </div>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
         <!-- Useful Links Section -->
         <div class="text-center">
             <h1 class="text-lg font-bold text-yellow-500">Useful Links</h1>
@@ -62,33 +62,30 @@
                 @endforeach
             </div>
         </div>
-        <div>
-
-
-            <!-- Document Section -->
-            <div class="text-center">
-                <h1 class="text-lg font-bold text-yellow-500">Dokumen</h1>
-                <div>
-                    @foreach ($document as $link)
-                        <a href="{{ $link['link'] }}" class="block text-white hover:text-yellow-500">
-                            {{ $link['title'] }}
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-
-            <!-- Sosial Media Section -->
-            <div class="text-center">
-                <h1 class="text-lg font-bold text-yellow-500">Sosial Media</h1>
-                <div>
-                    @foreach ($sosialMedia as $link)
-                        <a href="{{ $link['link'] }}" class="block text-white hover:text-yellow-500">
-                            {{ $link['title'] }}
-                        </a>
-                    @endforeach
-                </div>
+        <!-- Document Section -->
+        <div class="text-center">
+            <h1 class="text-lg font-bold text-yellow-500">Dokumen</h1>
+            <div>
+                @foreach ($document as $link)
+                    <a href="{{ $link['link'] }}" class="block text-white hover:text-yellow-500">
+                        {{ $link['title'] }}
+                    </a>
+                @endforeach
             </div>
         </div>
+
+        <!-- Sosial Media Section -->
+        <div class="text-center">
+            <h1 class="text-lg font-bold text-yellow-500">Sosial Media</h1>
+            <div>
+                @foreach ($sosialMedia as $link)
+                    <a href="{{ $link['link'] }}" class="block text-white hover:text-yellow-500">
+                        {{ $link['title'] }}
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
     </div>
     <div class="border-t border-gray-300 mt-4 mx-4"></div>
     <div class="text-center font-semibold py-4">

@@ -17,6 +17,12 @@ use App\Http\Controllers\Information\PageInfoController;
 Route::get('/', function () {
     return view('pages.frontend.homepage');
 });
+Route::get('/tentangkaka', function () {
+    return view('pages.frontend.tentangkaka');
+});
+Route::get('/tour', function () {
+    return view('pages.frontend.tour');
+});
 
 
 

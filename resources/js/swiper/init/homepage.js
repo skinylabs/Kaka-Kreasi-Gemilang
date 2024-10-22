@@ -2,7 +2,7 @@
 import { Swiper, Navigation, Autoplay, Pagination } from "../swiper"; // Pastikan ini diimport dengan benar
 
 // Inisialisasi Swiper untuk homepage
-const homepageSwiper = new Swiper("#homepageSwiper", {
+const homepageSlider = new Swiper("#homepageSlider", {
     modules: [Navigation, Autoplay],
     loop: true,
     autoplay: {
@@ -16,21 +16,11 @@ const homepageSwiper = new Swiper("#homepageSwiper", {
 });
 
 // Inisialisasi Swiper untuk produk
-const productSwiper = new Swiper("#productSwiper", {
-    modules: [Navigation, Pagination],
-    loop: true,
+const wisataTerbaikSlider = new Swiper("#wisataTerbaikSlider", {
+    loop: false,
     slidesPerView: 2,
-    centeredSlides: true,
     spaceBetween: 30,
     grabCursor: true,
-    navigation: {
-        nextEl: ".homepage-navigation-next",
-        prevEl: ".homepage-navigation-prev",
-    },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
 });
 
 const testimonialSwiper = new Swiper("#testimonialSwiper", {

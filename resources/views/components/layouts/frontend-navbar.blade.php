@@ -8,10 +8,10 @@
             class="nav-links duration-500 md:static absolute bg-white md:min-h-fit h-screen md:h-auto left-[-100%] top-0 md:w-auto w-[70%] flex items-center px-5 z-50">
             <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                 <li>
-                    <a class="hover:text-gray-500" href="#">Homepage</a>
+                    <a class="hover:text-gray-500" href="/">Homepage</a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500" href="#">Tentang Kaka</a>
+                    <a class="hover:text-gray-500" href="/tentangkaka">Tentang Kaka</a>
                 </li>
                 <li>
                     <a class="hover:text-gray-500" href="#">Tour</a>
@@ -108,8 +108,8 @@
             <li><a class="hover:text-gray-500" href="#">Sewa Kendaraan</a></li>
         `;
         const menuItems = `
-            <li><a class="hover:text-gray-500" href="#">Homepage</a></li>
-            <li><a class="hover:text-gray-500" href="#">Tentang Kaka</a></li>
+            <li><a class="hover:text-gray-500" href="/">Homepage</a></li>
+            <li><a class="hover:text-gray-500" href="/tentangkaka">Tentang Kaka</a></li>
             <li><a class="hover:text-gray-500" href="#">Tour</a></li>
             ${dropdownItems}
             <li><a class="hover:text-gray-500" href="#">Contact</a></li>
