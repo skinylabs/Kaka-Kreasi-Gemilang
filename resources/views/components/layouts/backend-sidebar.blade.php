@@ -3,25 +3,14 @@
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium">
+
             @php
                 $menuItems = [
                     [
                         'label' => 'Dashboard',
                         'route' => 'dashboard.index',
                         'icon' => 'dashboard',
-                        'pattern' => 'admin/dashboard*', // Pattern for Dashboard
-                    ],
-                    [
-                        'label' => 'Tour',
-                        'route' => 'tour.index',
-                        'icon' => 'dashboard',
-                        'pattern' => 'admin/tour*', // Pattern for Tour
-                    ],
-                    [
-                        'label' => 'Tata Tertib',
-                        'route' => 'tatatertib.index',
-                        'icon' => 'dashboard',
-                        'pattern' => 'admin/tatatertib*', // Pattern for Tata Tertib
+                        'pattern' => 'admin/dashboard*',
                     ],
                 ];
             @endphp
@@ -29,14 +18,77 @@
             @foreach ($menuItems as $item)
                 <li>
                     @php
-                        // Cek apakah rute saat ini cocok dengan pattern yang didefinisikan
                         $isActive = request()->is($item['pattern']);
                     @endphp
 
                     <a href="{{ route($item['route']) }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-blue-100 group {{ $isActive ? 'bg-blue-500 text-white hover:bg-blue-500 ' : '' }}">
+                        class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-blue-100 group {{ $isActive ? 'bg-blue-500 text-white hover:bg-blue-500' : '' }}">
                         <x-icons.icon type="{{ $item['icon'] }}" fill="{{ $isActive ? '#fff' : '#0f172a' }}" width="20"
                             height="20" />
+                        <span class="ms-3">{{ $item['label'] }}</span>
+                    </a>
+                </li>
+            @endforeach
+
+            <!-- Divider with Text -->
+            <x-ui.sidebar-divider text="Tour Barcode" />
+
+            @php
+                $menuItems = [
+                    [
+                        'label' => 'Tour',
+                        'route' => 'tour.index',
+                        'icon' => 'dashboard',
+                        'pattern' => 'admin/tour*',
+                    ],
+                    [
+                        'label' => 'Tata Tertib',
+                        'route' => 'tatatertib.index',
+                        'icon' => 'dashboard',
+                        'pattern' => 'admin/tatatertib*',
+                    ],
+                ];
+            @endphp
+
+            @foreach ($menuItems as $item)
+                <li>
+                    @php
+                        $isActive = request()->is($item['pattern']);
+                    @endphp
+
+                    <a href="{{ route($item['route']) }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-blue-100 group {{ $isActive ? 'bg-blue-500 text-white hover:bg-blue-500' : '' }}">
+                        <x-icons.icon type="{{ $item['icon'] }}" fill="{{ $isActive ? '#fff' : '#0f172a' }}"
+                            width="20" height="20" />
+                        <span class="ms-3">{{ $item['label'] }}</span>
+                    </a>
+                </li>
+            @endforeach
+
+            <!-- Divider with Text -->
+            <x-ui.sidebar-divider text="Frontend" />
+
+            @php
+                $otherMenuItems = [
+                    [
+                        'label' => 'Gallery',
+                        'route' => 'galleries.index',
+                        'icon' => 'dashboard',
+                        'pattern' => 'admin/galleries*',
+                    ],
+                ];
+            @endphp
+
+            @foreach ($otherMenuItems as $item)
+                <li>
+                    @php
+                        $isActive = request()->is($item['pattern']);
+                    @endphp
+
+                    <a href="{{ route($item['route']) }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-blue-100 group {{ $isActive ? 'bg-blue-500 text-white hover:bg-blue-500' : '' }}">
+                        <x-icons.icon type="{{ $item['icon'] }}" fill="{{ $isActive ? '#fff' : '#0f172a' }}"
+                            width="20" height="20" />
                         <span class="ms-3">{{ $item['label'] }}</span>
                     </a>
                 </li>

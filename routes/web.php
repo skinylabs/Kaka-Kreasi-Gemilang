@@ -11,7 +11,9 @@ use App\Http\Controllers\Backend\Tour\RuleController;
 use App\Http\Controllers\Backend\Tour\TataTertibController;
 use App\Http\Controllers\Backend\Tour\TourController;
 use App\Http\Controllers\Backend\Tour\TransportationController;
-
+use App\Http\Controllers\Backend\Gallery\GalleryController;
+use App\Http\Controllers\Backend\Gallery\LocationController;
+use App\Http\Controllers\Frontend\GalleryFrontendController;
 use App\Http\Controllers\Information\PageInfoController;
 
 Route::get('/', function () {
@@ -24,6 +26,9 @@ Route::get('/tour', function () {
     return view('pages.frontend.tour');
 });
 
+// Route untuk frontend (Public)
+Route::get('/galleries', [GalleryFrontendController::class, 'index'])->name('frontend.galleries.index');
+Route::get('/galleries/{gallery}', [GalleryFrontendController::class, 'show'])->name('frontend.galleries.show');
 
 
 
@@ -54,31 +59,32 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
     Route::prefix('admin')->group(function () {
         Route::resource('dashboard', DashboardController::class)->names('dashboard');
-
         Route::resource('tour', TourController::class)->names('tour');
 
         Route::resource('tour.participant', ParticipantController::class);
         Route::post('tour/{tour}/participant/import', [ParticipantController::class, 'import'])->name('tour.participant.import');
 
-
         Route::resource('tour.transportation', TransportationController::class);
         Route::post('tour/{tour}/transportation/import', [TransportationController::class, 'import'])->name('tour.transportation.import');
-
 
         Route::resource('tour.rundown', RundownController::class);
         Route::post('tour/{tour}/rundown/import', [RundownController::class, 'import'])->name('tour.rundown.import');
 
-
         Route::resource('tatatertib', TataTertibController::class);
         Route::post('/tatatertib/import', [TataTertibController::class, 'import'])->name('tatatertib.import');
 
-
         Route::resource('tatatertib.rule', RuleController::class);
         Route::post('tatatertib/{tatatertib}/rule/import', [RuleController::class, 'import'])->name('tatatertib.rule.import');
+
+        // Resource untuk Galleries dengan pengecualian middleware untuk index dan show
+        Route::resource('galleries', GalleryController::class);
+
+        Route::resource('locations', LocationController::class);
     });
 });
+
+
 
 require __DIR__ . '/auth.php';

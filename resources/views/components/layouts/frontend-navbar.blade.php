@@ -14,7 +14,7 @@
                     <a class="hover:text-gray-500" href="/tentangkaka">Tentang Kaka</a>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500" href="#">Tour</a>
+                    <a class="hover:text-gray-500" href="/tour">Tour</a>
                 </li>
                 <!-- Dropdown Layanan (hanya untuk desktop) -->
                 <li class="relative md:block hidden">
@@ -30,15 +30,15 @@
                     <ul id="dropdown-menu"
                         class="absolute left-0 top-full mt-2 bg-white shadow-lg rounded-lg hidden flex-col min-w-[150px] z-50">
                         <li>
-                            <a class="block px-4 py-2 hover:bg-gray-100" href="#">Gallery</a>
+                            <a class="block px-4 py-2 hover:bg-gray-100" href="/gallery">Gallery</a>
                         </li>
                         <li>
-                            <a class="block px-4 py-2 hover:bg-gray-100" href="#">Sewa Kendaraan</a>
+                            <a class="block px-4 py-2 hover:bg-gray-100" href="/sewa-kendaraan">Sewa Kendaraan</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a class="hover:text-gray-500" href="#">Contact</a>
+                    <a class="hover:text-gray-500" href="/contact">Contact</a>
                 </li>
             </ul>
         </div>
@@ -110,9 +110,9 @@
         const menuItems = `
             <li><a class="hover:text-gray-500" href="/">Homepage</a></li>
             <li><a class="hover:text-gray-500" href="/tentangkaka">Tentang Kaka</a></li>
-            <li><a class="hover:text-gray-500" href="#">Tour</a></li>
+            <li><a class="hover:text-gray-500" href="/tour">Tour</a></li>
             ${dropdownItems}
-            <li><a class="hover:text-gray-500" href="#">Contact</a></li>
+            <li><a class="hover:text-gray-500" href="/contact">Contact</a></li>
         `;
         navLinks.querySelector('ul').innerHTML = menuItems; // Ganti konten menu dengan menu mobile
     }
