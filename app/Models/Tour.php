@@ -47,6 +47,11 @@ class Tour extends Model
         return $this->hasMany(Transportation::class);
     }
 
+    public function tourImages()
+    {
+        return $this->hasMany(TourImage::class);
+    }
+
     public function rundown()
     {
         return $this->hasOne(Rundown::class);

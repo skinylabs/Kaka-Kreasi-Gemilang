@@ -254,6 +254,116 @@
             </table>
         </div>
     </section>
+    <section>
+        <div class="flex justify-between items-center mt-6">
+            <div>
+                <h1 class="text-2xl font-semibold text-slate-800">TOUR IMAGES</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="{{ route('tour.rundown.create', $tour->id) }}"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
+                    Kegiatan</a>
+
+                <button onclick="document.getElementById('importRundownModal').classList.remove('hidden')"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
+                    Import Rundown
+                </button>
+            </div>
+        </div>
+
+        <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
+
+        <!-- Tampilkan Gambar Tur -->
+        <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-auto mt-4">
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">Daftar Gambar</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                @if ($tour->tourImages->isEmpty())
+                    <div class="col-span-3 text-center">Belum ada gambar untuk tur ini.</div>
+                @else
+                    @foreach ($tour->tourImages as $image)
+                        <div class="border rounded-lg overflow-hidden shadow">
+                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="Tour Image"
+                                class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <p class="text-sm text-gray-600">Tag: {{ ucfirst($image->image_tag) }}</p>
+
+                                <!-- Tombol Edit dan Delete -->
+                                <div class="flex justify-between mt-4">
+                                    <!-- Tombol Edit -->
+                                    <button
+                                        onclick="document.getElementById('editImageModal-{{ $image->id }}').classList.remove('hidden')"
+                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Edit</button>
+
+                                    <!-- Tombol Delete -->
+                                    <button
+                                        onclick="document.getElementById('deleteImageModal-{{ $image->id }}').classList.remove('hidden')"
+                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Edit Gambar -->
+                        <div id="editImageModal-{{ $image->id }}"
+                            class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                            <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                                <h3 class="text-lg font-semibold mb-4">Edit Image</h3>
+                                <form action="{{ route('tour.tour-images.update', [$tour->id, $image->id]) }}"
+                                    method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium text-gray-700">Tag</label>
+                                        <input type="text" name="image_tag" value="{{ $image->image_tag }}"
+                                            class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label class="block text-sm font-medium text-gray-700">Gambar Baru
+                                            (Opsional)
+                                        </label>
+                                        <input type="file" name="image_path"
+                                            class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+                                    </div>
+
+                                    <div class="flex justify-end">
+                                        <button type="button"
+                                            onclick="document.getElementById('editImageModal-{{ $image->id }}').classList.add('hidden')"
+                                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md">Cancel</button>
+                                        <button type="submit"
+                                            class="ml-4 px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Modal Konfirmasi Delete Gambar -->
+                        <div id="deleteImageModal-{{ $image->id }}"
+                            class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                            <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                                <h3 class="text-lg font-semibold mb-4">Delete Image</h3>
+                                <p>Apakah Anda yakin ingin menghapus gambar ini?</p>
+                                <div class="flex justify-end mt-4">
+                                    <button type="button"
+                                        onclick="document.getElementById('deleteImageModal-{{ $image->id }}').classList.add('hidden')"
+                                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md">Cancel</button>
+
+                                    <form action="{{ route('tour.tour-images.destroy', [$tour->id, $image->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="ml-4 px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
+
 
 
 

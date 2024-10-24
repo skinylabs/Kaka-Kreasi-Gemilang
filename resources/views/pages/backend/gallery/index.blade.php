@@ -128,7 +128,7 @@
             </div>
         </div>
 
-        <!-- Modal untuk konfirmasi penghapusan -->
+        <!-- Modal -->
         <div id="modal" class="fixed inset-0 items-center justify-center z-50 bg-gray-900 bg-opacity-50 hidden">
             <div class="bg-white rounded-lg p-6 shadow-lg">
                 <h2 class="text-lg font-semibold mb-4">Apakah Anda yakin ingin menghapus data ini?</h2>
@@ -190,25 +190,30 @@
                     editModal.classList.add('hidden');
                 });
 
-                // Modal konfirmasi hapus
+                // Get modal elements
                 const modal = document.getElementById('modal');
+                const deleteForm = document.getElementById('delete-form');
                 const cancelBtn = document.getElementById('cancel-btn');
-                const deleteBtns = document.querySelectorAll('.delete-btn');
 
-                deleteBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.getAttribute('data-id');
-                        const actionUrl = `/galleries/${id}`;
-                        document.getElementById('delete-form').action = actionUrl;
+                // Handle delete button click
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const galleryId = this.getAttribute('data-id'); // Update to 'galleryId'
+                        deleteForm.setAttribute('action', `/admin/galleries/${galleryId}`);
                         modal.classList.remove('hidden');
                         modal.classList.add('flex');
                     });
                 });
 
+                // Handle cancel button click
                 cancelBtn.addEventListener('click', function() {
+                    // Hide the modal
                     modal.classList.add('hidden');
+                    modal.classList.remove('flex');
                 });
 
+                // Close modal when clicking outside the modal content
                 window.addEventListener('click', function(event) {
                     if (event.target === modal) {
                         modal.classList.add('hidden');

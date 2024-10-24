@@ -104,8 +104,8 @@
     // Mengatur menu mobile
     function setupMobileMenu() {
         const dropdownItems = `
-            <li><a class="hover:text-gray-500" href="#">Gallery</a></li>
-            <li><a class="hover:text-gray-500" href="#">Sewa Kendaraan</a></li>
+            <li><a class="hover:text-gray-500" href="/galleries">Gallery</a></li>
+            <li><a class="hover:text-gray-500" href="/sewakendaraan">Sewa Kendaraan</a></li>
         `;
         const menuItems = `
             <li><a class="hover:text-gray-500" href="/">Homepage</a></li>

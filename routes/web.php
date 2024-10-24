@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Tour\TourController;
 use App\Http\Controllers\Backend\Tour\TransportationController;
 use App\Http\Controllers\Backend\Gallery\GalleryController;
 use App\Http\Controllers\Backend\Gallery\LocationController;
+use App\Http\Controllers\Backend\Tour\TourImageController;
 use App\Http\Controllers\Frontend\GalleryFrontendController;
 use App\Http\Controllers\Information\PageInfoController;
 
@@ -63,6 +64,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('dashboard', DashboardController::class)->names('dashboard');
         Route::resource('tour', TourController::class)->names('tour');
 
+        Route::resource('tour.tour-images', TourImageController::class);
+
         Route::resource('tour.participant', ParticipantController::class);
         Route::post('tour/{tour}/participant/import', [ParticipantController::class, 'import'])->name('tour.participant.import');
 
@@ -77,6 +80,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
         Route::resource('tatatertib.rule', RuleController::class);
         Route::post('tatatertib/{tatatertib}/rule/import', [RuleController::class, 'import'])->name('tatatertib.rule.import');
+
+
+
 
         // Resource untuk Galleries dengan pengecualian middleware untuk index dan show
         Route::resource('galleries', GalleryController::class);
