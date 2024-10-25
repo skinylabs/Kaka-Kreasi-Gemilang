@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Participant;
 use App\Models\Rundown;
 use App\Models\Tour;
+use App\Models\TourImage;
 use App\Models\Transportation;
 use Illuminate\Http\Request;
 
@@ -20,30 +21,32 @@ class PageInfoController extends Controller
 
     public function show(Request $request, $slug)
     {
+        // Ambil data tour berdasarkan slug
+        $tour = Tour::where('slug', $slug)->firstOrFail();
+
         // Periksa apakah pengguna telah login
         if ($request->session()->has('logged_in') && $request->session()->get('logged_in') === true) {
-            // Ambil slug tour dari session
             $loggedTourSlug = $request->session()->get('tour_slug');
 
             // Cek apakah slug tour yang diminta sesuai dengan slug yang disimpan di session
             if ($loggedTourSlug !== null && $slug !== $loggedTourSlug) {
                 // Logout pengguna
                 $request->session()->forget(['logged_in', 'tour_slug']);
-
-                // Redirect ke halaman informasi tour dengan pesan error
                 return redirect()->route('tour.info')->withErrors(['message' => 'Anda tidak memiliki akses ke tour ini.']);
             }
         }
 
-        // Ambil data tour berdasarkan slug
-        $tour = Tour::where('slug', $slug)->firstOrFail();
+        // Ambil gambar terkait dengan tour
+        $tourImages = TourImage::where('tour_id', $tour->id)->get();
 
-        // Kirim data tour ke view
+        // Kirim data tour dan gambar ke view
         return view('pages.information.show', [
             'tour' => $tour,
+            'tourImages' => $tourImages,
             'title' => $tour->name,
         ]);
     }
+
 
     public function transportation($slug, Request $request)
     {

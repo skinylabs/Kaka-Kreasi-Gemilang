@@ -11,15 +11,13 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 </head>
 
 <body>
     <x-layouts.information-navbar :tour="$tour" />
     <div class="pt-16"></div>
     <main class="pt-4 px-4 ">
-        @yield('content')
+        {{ $slot }}
     </main>
     <x-layouts.information-footer />
 
@@ -27,8 +25,6 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-
 </body>
 
 </html>

@@ -1,22 +1,19 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\pages\tour;
 
-
-use App\Models\Tour;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class InformationLayout extends Component
+class participants.blade extends Component
 {
-    public $tour;
     /**
      * Create a new component instance.
      */
-    public function __construct(Tour $tour)
+    public function __construct()
     {
-        $this->tour = $tour;
+        //
     }
 
     /**
@@ -24,6 +21,6 @@ class InformationLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.information');
+        return view('components.pages.tour.participants.blade.php');
     }
 }

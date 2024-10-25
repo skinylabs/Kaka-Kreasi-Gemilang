@@ -1,20 +1,21 @@
 <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-auto mt-4">
     <div class="flex justify-between items-center mt-6">
         <div>
-            <h1 class="text-2xl font-semibold text-slate-800">TRANSPORTATION</h1>
+            <h1 class="text-2xl font-semibold text-slate-800">IMAGES</h1>
         </div>
         <div class="flex items-center space-x-4">
             <a href="{{ route('tour.tour-images.create', $tour->id) }}"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">Tambah
                 Gambar</a>
 
-            <!-- Tombol untuk membuka modal transportasi -->
-            <button onclick="document.getElementById('importTransportModal').classList.remove('hidden')"
+            <!-- Tombol untuk membuka modal import gambar -->
+            <button onclick="document.getElementById('importImageModal').classList.remove('hidden')"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
-                Import Transportasi
+                Import Gambar
             </button>
         </div>
     </div>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @if ($tour->tourImages->isEmpty())
             <div class="col-span-3 text-center">Belum ada gambar untuk tur ini.</div>
@@ -83,7 +84,7 @@
 </div>
 
 <!-- Modal untuk Konfirmasi Penghapusan -->
-<div id="deleteImageModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 items-center justify-center z-50">
+<div id="deleteImageModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
     <div class="bg-white rounded-lg p-6 max-w-sm mx-auto">
         <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Penghapusan</h2>
         <p class="mt-2 text-gray-600">Apakah Anda yakin ingin menghapus gambar ini?</p>

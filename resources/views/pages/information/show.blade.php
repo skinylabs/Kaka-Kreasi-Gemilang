@@ -1,6 +1,4 @@
-@extends('layouts.information')
-@section('content')
-@section('content')
+<x-information-layout :tour="$tour">
     <section class="flex flex-col gap-6">
         <div class="text-center">
             <h2 class="text-2xl font-bold text-slate-800">
@@ -10,40 +8,31 @@
                 {{ $tour->client }}
             </p>
         </div>
-        @if ($tour->slug === 'widya-wisata-bromo')
-            <div class="my-slider">
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bromo1.webp') }}" alt="Image 1" />
+
+        <section class="swiper " id="informationSlider">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+
+                <!-- Slides -->
+                <div class="swiper-slide w-full overflow-hidden">
+                    <img src="{{ asset('images/carousel/bali3.webp') }}" alt="Image 1"
+                        class="h-36 w-full object-cover object-center rounded-lg md:h-72 lg:h-96" />
                 </div>
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bromo2.webp') }}" alt="Image 2" />
+                <!-- Slides -->
+                <div class="swiper-slide w-full overflow-hidden">
+                    <img src="{{ asset('images/carousel/bali3.webp') }}" alt="Image 1"
+                        class="h-36 w-full object-cover object-center rounded-lg md:h-72 lg:h-96" />
                 </div>
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bromo3.webp') }}" alt="Image 3" />
-                </div>
+
             </div>
-        @else
-            <div class="my-slider">
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bali1.webp') }}" alt="Image 1" />
-                </div>
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bali2.webp') }}" alt="Image 2" />
-                </div>
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bali3.webp') }}" alt="Image 3" />
-                </div>
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bali4.webp') }}" alt="Image 3" />
-                </div>
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bali5.webp') }}" alt="Image 3" />
-                </div>
-                <div class="h-40 object-cover object-center overflow-hidden rounded-lg">
-                    <img src="{{ asset('images/carousel/bali6.webp') }}" alt="Image 3" />
-                </div>
+            <!-- Custom Navigation Buttons -->
+            <div class="homepage-swiper-button-prev homepage-navigation-prev">
+                <ion-icon name="chevron-back-outline" class="text-lg"></ion-icon>
             </div>
-        @endif
+            <div class="homepage-swiper-button-next homepage-navigation-next">
+                <ion-icon name="chevron-forward-outline" class="text-lg"></ion-icon>
+            </div>
+        </section>
 
         <div class="grid grid-cols-2 gap-4 ">
             <a href="{{ route('transportation', ['slug' => $tour->slug]) }}"
@@ -64,27 +53,7 @@
                     Rundown
                 </h1>
             </a>
-
         </div>
     </section>
-
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const slider = tns({
-                container: ".my-slider", // Ganti dengan selector yang sesuai
-                items: 1,
-                slideBy: "page",
-                autoplay: true, // Aktifkan autoplay
-                speed: 300,
-                nav: false, // Tampilkan navigasi (tombol prev/next)
-                controls: true, // Tampilkan kontrol (tombol prev/next)
-                controlsText: [
-                    `<ion-icon name="chevron-back-outline"></ion-icon>`,
-                    `<ion-icon name="chevron-forward-outline"></ion-icon>`,
-                ],
-                autoplayButtonOutput: false,
-            });
-        });
-    </script>
-@endsection
+    @vite('resources/js/swiper/init/information.js')
+</x-information-layout>
