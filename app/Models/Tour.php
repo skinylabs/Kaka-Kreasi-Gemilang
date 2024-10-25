@@ -54,7 +54,7 @@ class Tour extends Model
 
     public function rundown()
     {
-        return $this->hasOne(Rundown::class);
+        return $this->hasMany(Rundown::class);
     }
 
     public function tataTertib()

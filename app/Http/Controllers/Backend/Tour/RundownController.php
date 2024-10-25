@@ -17,8 +17,8 @@ class RundownController extends Controller
      */
     public function index(Tour $tour)
     {
-        // $rundown = Rundown::all();
-        // return view('pages.backend.tour.pages.rundown.index', compact('rundown', 'tour'));
+        $rundown = Rundown::all();
+        return view('pages.backend.tour.pages.rundown.index', compact('rundown', 'tour'));
     }
 
     /**
@@ -120,6 +120,7 @@ class RundownController extends Controller
     public function destroy(Tour $tour, Rundown $rundown)
     {
         $rundown->delete();
-        return redirect()->route('tour.show', $tour->id)->with('success', 'Rundown berhasil dihapus.');
+        // Redirect back dengan pesan sukses
+        return back()->with('success', 'Gambar berhasil dihapus.');
     }
 }

@@ -38,17 +38,21 @@ class TourImageController extends Controller
             'image_tag' => 'sometimes|string',
         ]);
 
+        // Loop untuk menyimpan setiap gambar yang di-upload
         foreach ($request->file('images') as $image) {
-            $path = $image->store('tour_images', 'public'); // Menyimpan gambar ke storage
+            $path = $image->store('tour-images', 'public'); // Menyimpan gambar ke storage
 
+            // Simpan path dan data gambar ke dalam database
             TourImage::create([
                 'image_path' => $path,
-                'image_tag' => $request->input('image_tag', 'activity'), // Default ke activity
-                'tour_id' => $tour->id, // Menggunakan tour_id yang sudah dipassing
+                'image_tag' => $request->input('image_tag', 'activity'), // Default ke 'activity' jika tidak ada tag yang diinput
+                'tour_id' => $tour->id, // Menggunakan tour_id dari parameter
             ]);
         }
+
         return redirect()->route('tour.show', $tour->id)->with('success', 'Tour Image berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
@@ -63,47 +67,49 @@ class TourImageController extends Controller
      */
     public function edit(Tour $tour, TourImage $tourImage)
     {
-        return view('pages.backend.tour.pages.images.edit', compact('images', 'tour'));
+        return view('pages.backend.tour.pages.images.edit', compact('tour', 'tourImage'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tour $tour, TourImage $image)
+    public function update(Request $request, Tour $tour, $id)
     {
         // Validasi input
         $request->validate([
-            'image_tag' => 'required|string|max:255',
-            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi tipe file
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Gambar tidak wajib diupload
+            'image_tag' => 'sometimes|string', // Validasi tag jika ada
         ]);
 
-        // Jika ada file baru yang di-upload
+        // Ambil tourImage berdasarkan ID
+        $tourImage = TourImage::findOrFail($id);
+
+        // Cek apakah ada gambar baru yang di-upload
         if ($request->hasFile('image_path')) {
-            // Hapus gambar lama dari storage
-            if ($image->image_path) {
-                Storage::delete('public/' . $image->image_path); // Menghapus gambar lama
+            // Hapus gambar lama jika ada
+            if ($tourImage->image_path) {
+                Storage::delete('public/' . $tourImage->image_path); // Hapus file lama dari storage
             }
 
-            // Simpan gambar baru ke storage
-            $imagePath = $request->file('image_path')->store('tour_images', 'public');
-            $image->image_path = $imagePath; // Update path gambar baru
+            // Simpan gambar baru
+            $path = $request->file('image_path')->store('tour-images', 'public');
+            $tourImage->image_path = $path; // Update path gambar baru di database
         }
 
-        // Update tag gambar dan tour_id (pastikan ini ada)
-        $image->image_tag = $request->image_tag;
-        $image->tour_id = $tour->id; // Pastikan tour_id di-set dengan benar
+        // Update image_tag jika ada
+        $tourImage->image_tag = $request->input('image_tag', $tourImage->image_tag); // Tetap gunakan tag lama jika tidak ada input
 
         // Simpan perubahan
-        $image->save();
+        $tourImage->save();
 
-        return redirect()->back()->with('success', 'Gambar berhasil diupdate.');
+        return redirect()->route('tour.show', $tour->id)->with('success', 'Gambar berhasil diupdate.');
     }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TourImage $tourImage)
+    public function destroy(Tour $tour, TourImage $tourImage) // Tambahkan Tour $tour sebagai parameter
     {
         // Hapus gambar dari storage
         Storage::delete('public/' . $tourImage->image_path);
@@ -111,6 +117,7 @@ class TourImageController extends Controller
         // Hapus data gambar dari database
         $tourImage->delete();
 
-        return redirect()->back()->with('success', 'Gambar berhasil dihapus.');
+        // Redirect back dengan pesan sukses
+        return back()->with('success', 'Gambar berhasil dihapus.');
     }
 }
