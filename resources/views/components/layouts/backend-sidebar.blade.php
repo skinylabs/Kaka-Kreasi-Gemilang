@@ -71,6 +71,12 @@
             @php
                 $otherMenuItems = [
                     [
+                        'label' => 'Tour List',
+                        'route' => 'frontend-tour.index',
+                        'icon' => 'dashboard',
+                        'pattern' => 'admin/frontend-tour*',
+                    ],
+                    [
                         'label' => 'Gallery',
                         'route' => 'galleries.index',
                         'icon' => 'dashboard',

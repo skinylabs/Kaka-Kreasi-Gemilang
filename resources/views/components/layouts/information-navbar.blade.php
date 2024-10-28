@@ -17,22 +17,28 @@
             <img class="w-40 cursor-pointer" src="{{ asset('images/logo/kakatour.webp') }}" alt="logo kaka tour">
         </div>
         <div class="flex flex-col items-start gap-4">
+            <a href="{{ route('tour.info.show', ['slug' => $tour->slug]) }}"
+                class="py-2 {{ request()->is('information/' . $tour->slug) ? 'bg-blue-500 text-white' : 'text-gray-800' }} rounded-lg px-4 w-full">
+                <p class="font-semibold">
+                    Homepage
+                </p>
+            </a>
             <a href="{{ route('transportation', ['slug' => $tour->slug]) }}"
                 class="py-2 {{ request()->is('information/' . $tour->slug . '/transportation') ? 'bg-blue-500 text-white' : 'text-gray-800' }} rounded-lg px-4 w-full">
                 <p class="font-semibold">
                     Transportasi
                 </p>
             </a>
-            {{-- <a href="{{ route('hotel', ['slug' => $tour->slug]) }}"
-                class="py-2 {{ request()->is('information/' . $tour->slug . '/hotel') ? 'bg-blue-500 text-white' : 'text-gray-800' }} rounded-lg px-4 w-full">
-                <p class="font-semibold">
-                    Hotel
-                </p>
-            </a> --}}
             <a href="{{ route('rundown', ['slug' => $tour->slug]) }}"
                 class="py-2 {{ request()->is('information/' . $tour->slug . '/rundown') ? 'bg-blue-500 text-white' : 'text-gray-800' }} rounded-lg px-4 w-full">
                 <p class="font-semibold">
                     Rundown
+                </p>
+            </a>
+            <a href="{{ route('galleries', ['slug' => $tour->slug]) }}"
+                class="py-2 {{ request()->is('information/' . $tour->slug . '/galleries') ? 'bg-blue-500 text-white' : 'text-gray-800' }} rounded-lg px-4 w-full">
+                <p class="font-semibold">
+                    Gallery
                 </p>
             </a>
         </div>

@@ -113,4 +113,33 @@ class PageInfoController extends Controller
             'hasDescription' => $hasDescription,
         ]);
     }
+
+    public function galleries($slug, Request $request)
+    {
+        $tour = Tour::where('slug', $slug)->firstOrFail();
+
+        // Ambil semua kategori gambar yang tersedia untuk tour ini
+        $availableCategories = TourImage::where('tour_id', $tour->id)
+            ->distinct()
+            ->pluck('image_tag');
+
+        $category = $request->get('category');
+        $query = TourImage::where('tour_id', $tour->id);
+
+        // Filter by category
+        if ($category) {
+            $query->where('image_tag', $category);
+        }
+
+        $tourImages = $query->get();
+
+        return view('pages.information.galleries', [
+            'tour' => $tour,
+            'slug' => $slug,
+            'tourImages' => $tourImages,
+            'title' => $tour->name,
+            'category' => $category,
+            'availableCategories' => $availableCategories,
+        ]);
+    }
 }

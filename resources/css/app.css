@@ -88,6 +88,22 @@
 .homepage-navigation-next {
     @apply bg-white opacity-50 text-slate-800  items-center justify-center rounded-full absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer z-10 hidden md:flex md:h-8 md:w-8;
 }
+/* SLIDER GALLERY */
+.gallery-navigation-prev {
+    @apply bg-white opacity-10 text-slate-800 items-center justify-center rounded-full absolute top-1/2 left-3 -translate-y-1/2 cursor-pointer z-50 flex h-8 w-8 md:h-8 md:w-8;
+}
+
+.gallery-navigation-next {
+    @apply bg-white opacity-10 text-slate-800 items-center justify-center rounded-full absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer z-50 flex h-8 w-8 md:h-8 md:w-8;
+}
+
+/* Pastikan tombol navigasi terlihat di mobile */
+@media (max-width: 768px) {
+    .gallery-navigation-prev,
+    .gallery-navigation-next {
+        @apply h-10 w-10; /* Ukuran lebih besar di mobile */
+    }
+}
 
 .testimonial-swiper-button-prev {
     @apply bg-blue-500 w-6 h-6 text-white flex  items-center justify-center rounded-full absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer z-10  md:flex md:h-8 md:w-8;
@@ -169,4 +185,15 @@
 
 .animate-arrow {
     animation: arrowMove 1s ease-in-out infinite; /* Ulangi secara terus menerus */
+}
+
+/* Pinterest-style masonry layout */
+.columns-2 .break-inside-avoid {
+    break-inside: avoid;
+}
+.columns-3 .break-inside-avoid {
+    break-inside: avoid;
+}
+.columns-4 .break-inside-avoid {
+    break-inside: avoid;
 }

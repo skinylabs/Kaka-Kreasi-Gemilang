@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\Tour\TourController;
 use App\Http\Controllers\Backend\Tour\TransportationController;
 use App\Http\Controllers\Backend\Gallery\GalleryController;
 use App\Http\Controllers\Backend\Gallery\LocationController;
+use App\Http\Controllers\Backend\Homepage\FrontendTourController;
 use App\Http\Controllers\Backend\Tour\TourImageController;
 use App\Http\Controllers\Frontend\GalleryFrontendController;
 use App\Http\Controllers\Information\PageInfoController;
@@ -33,6 +34,7 @@ Route::get('/galleries/{gallery}', [GalleryFrontendController::class, 'show'])->
 
 
 
+
 // Halaman informasi umum (belum login)
 Route::get('/information', [PageInfoController::class, 'index'])->name('tour.info');
 
@@ -45,9 +47,13 @@ Route::post('/check-password', [InfoAuthController::class, 'checkPassword'])->na
 Route::middleware(['user'])->group(function () {
     Route::prefix('information')->group(function () {
         Route::get('/{slug}', [PageInfoController::class, 'show'])->name('tour.info.show');
+
         Route::get('/{slug}/transportation', [PageInfoController::class, 'transportation'])->name('transportation');
-        Route::get('/{slug}/hotel', [PageInfoController::class, 'hotel'])->name('hotel');
+
         Route::get('/{slug}/rundown', [PageInfoController::class, 'rundown'])->name('rundown');
+
+        Route::get('/{slug}/galleries', [PageInfoController::class, 'galleries'])->name('galleries');
+
         // Logout route
         Route::post('/logout', [InfoAuthController::class, 'logout'])->name('tour.logout');
     });
@@ -88,6 +94,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('galleries', GalleryController::class);
 
         Route::resource('locations', LocationController::class);
+
+        Route::resource('frontend-tour', FrontendTourController::class);
     });
 });
 

@@ -1,6 +1,4 @@
-@extends('pages.information.app')
-
-@section('content')
+<x-information-layout :tour="$tour">
     <section class="flex flex-col gap-6">
         <div class="text-center">
             <h1 class="text-2xl font-bold text-slate-800">
@@ -12,7 +10,8 @@
         </div>
 
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px]">
-            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
+            <table
+                class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative text-center">
                 <thead>
                     <tr class="bg-slate-200 sticky top-0 text-gray-600 font-bold text-sm uppercase">
                         <th class="px-6 py-3">No</th>
@@ -64,4 +63,4 @@
             </table>
         </div>
     </section>
-@endsection
+</x-information-layout>
