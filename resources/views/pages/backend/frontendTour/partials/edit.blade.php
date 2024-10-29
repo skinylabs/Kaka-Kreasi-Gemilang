@@ -9,10 +9,16 @@
                 <input type="text" class="form-control" name="name" value="{{ $frontendTour->name }}" required>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Gambar</label>
-                <input type="file" class="form-control" name="image" accept="image/*">
-                <img src="{{ asset('storage/' . $frontendTour->image) }}" alt="{{ $frontendTour->name }}" width="100"
-                    class="mt-2">
+                <label for="images" class="form-label">Gambar</label>
+                <input type="file" class="form-control" name="images[]" accept="image/*" multiple>
+
+                <!-- Tampilkan semua gambar yang ada -->
+                <div class="mt-2">
+                    @foreach ($frontendTour->images as $image)
+                        <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $frontendTour->name }}" width="100"
+                            class="me-2 mb-2">
+                    @endforeach
+                </div>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Deskripsi</label>

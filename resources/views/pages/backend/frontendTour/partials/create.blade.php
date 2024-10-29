@@ -8,8 +8,8 @@
                 <input type="text" class="form-control" name="name" required>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Gambar</label>
-                <input type="file" class="form-control" name="image" accept="image/*" required>
+                <label for="images" class="form-label">Gambar</label>
+                <input type="file" class="form-control" name="images[]" accept="image/*" multiple>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Deskripsi</label>

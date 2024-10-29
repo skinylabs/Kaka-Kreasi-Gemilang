@@ -11,9 +11,13 @@ class FrontendTour extends Model
 
     protected $fillable = [
         'name',
-        'image',
         'description',
         'price',
         'rating',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(FrontendTourImages::class, 'tour_id');
+    }
 }

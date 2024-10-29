@@ -57,7 +57,7 @@
                     </ol>
                 </div>
             </div>
-            <a href="{{ route('galleries.create') }}" class="button-primary">Add New Image</a>
+            <a href="{{ route('frontend-tour.create') }}" class="button-primary">Add New Image</a>
         </div>
 
         <div class="overflow-x-auto rounded-lg shadow overflow-y-auto relative h-[400px]">
@@ -78,34 +78,28 @@
                     @foreach ($tours as $t)
                         <tr class="border-dashed border-t border-gray-200">
                             <td class="p-2">{{ $loop->iteration }}</td>
-                            <td class="p-2">{{ $tour->name }}</td>
-                            <td class="p-2">{{ $g->location->name }}</td>
+                            <td class="p-2">{{ $t->name }}</td>
                             <td class="p-2">
-                                @if ($g->images->isNotEmpty())
-                                    @foreach ($g->images as $image)
-                                        <img src="{{ asset('storage/' . $tour->image) }}" alt="{{ $tour->name }}"
+                                @if ($t->images->isNotEmpty())
+                                    <!-- Cek apakah ada gambar terkait -->
+                                    @foreach ($t->images as $image)
+                                        <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $t->name }}"
                                             class="w-16 h-16 object-cover">
                                     @endforeach
                                 @else
                                     <span>No Image</span>
                                 @endif
                             </td>
-
-
-
-
-                            <td class="p-2">{{ $g->created_at ? $g->created_at->format('d M Y') : 'No Date' }}</td>
                             <td class="p-2">
                                 <div class="flex gap-4 justify-center">
-                                    <a href="javascript:void(0);" class="bg-yellow-500 icon-function"
-                                        onclick="openModal('{{ asset('storage/' . $g->images->first()->image_path) }}', '{{ $g->title }}', '{{ $g->location }}', '{{ $g->id }}')">
-                                        <x-icons.icon type="eye" fill="#fff" width="20" height="20" />
-                                    </a>
-                                    <a href="javascript:void(0);" class="bg-blue-500 icon-function"
-                                        onclick="openEditModal('{{ $g->id }}', '{{ $g->title }}', '{{ $g->location }}', '{{ asset('storage/' . $g->images->first()->image_path) }}')">
+
+                                    <a href="{{ route('frontend-tour.edit', $tour) }}"
+                                        class="bg-blue-500 icon-function">
                                         <x-icons.icon type="edit" fill="#fff" width="20" height="20" />
                                     </a>
-                                    <button class="bg-red-500 icon-function delete-btn" data-id="{{ $g->id }}">
+
+
+                                    <button class="bg-red-500 icon-function delete-btn" data-id="{{ $t->id }}">
                                         <x-icons.icon type="trash" fill="#fff" width="20" height="20" />
                                     </button>
                                 </div>

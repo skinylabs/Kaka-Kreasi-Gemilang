@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('frontend_tours', function (Blueprint $table) {
+        Schema::create('frontend_tour_images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-
-            $table->text('description');
-            $table->decimal('price', 10, 2);
-            $table->tinyInteger('rating')->unsigned()->default(0);
+            $table->foreignId('tour_id')->constrained('frontend_tours')->onDelete('cascade'); // Relasi ke frontend_tours
+            $table->string('path'); // Menyimpan path gambar
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('frontend_tours');
+        Schema::dropIfExists('frontend_tour_images');
     }
 };

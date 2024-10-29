@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\Gallery\LocationController;
 use App\Http\Controllers\Backend\Homepage\FrontendTourController;
 use App\Http\Controllers\Backend\Tour\TourImageController;
 use App\Http\Controllers\Frontend\GalleryFrontendController;
+use App\Http\Controllers\Frontend\TourFrontendController;
 use App\Http\Controllers\Information\PageInfoController;
 
 Route::get('/', function () {
@@ -24,9 +25,11 @@ Route::get('/', function () {
 Route::get('/tentangkaka', function () {
     return view('pages.frontend.tentangkaka');
 });
-Route::get('/tour', function () {
-    return view('pages.frontend.tour');
-});
+// Route::get('/tour', function () {
+//     return view('pages.frontend.tour');
+// });
+
+Route::get('/tour', [TourFrontendController::class, 'index'])->name('frontend.tours.index');
 
 // Route untuk frontend (Public)
 Route::get('/galleries', [GalleryFrontendController::class, 'index'])->name('frontend.galleries.index');

@@ -38,7 +38,7 @@
             </div>
 
             <!-- Tombol untuk Mobile -->
-            <a href="#" class="md:hidden mx-2 overflow-hidden bg-transparent border-0">
+            <a href="/tour" class="md:hidden mx-2 overflow-hidden bg-transparent border-0">
                 <ion-icon name="arrow-forward-outline"
                     class="transition-transform duration-300 ease-in-out animate-swing text-blue-500 w-8 h-8 animate-arrow"></ion-icon>
             </a>
