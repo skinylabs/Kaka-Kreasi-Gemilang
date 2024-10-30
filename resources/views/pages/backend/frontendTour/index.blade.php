@@ -1,49 +1,8 @@
 <x-backend-layout>
-    <div class="container">
-        <h1>Daftar Tour</h1>
-        <a href="{{ route('frontend-tour.create') }}" class="btn btn-primary">Tambah Tour</a>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nama Tempat</th>
-                    <th>Gambar</th>
-                    <th>Deskripsi</th>
-                    <th>Harga</th>
-                    <th>Rating</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($tours as $tour)
-                    <tr>
-                        <td>{{ $tour->name }}</td>
-                        <td><img src="{{ asset('storage/' . $tour->image) }}" alt="{{ $tour->name }}" width="100">
-                        </td>
-                        <td>{{ $tour->description }}</td>
-                        <td>{{ $tour->price }}</td>
-                        <td>{{ str_repeat('⭐', $tour->rating) }}</td>
-                        <td>
-                            <a href="{{ route('frontend-tour.edit', $tour) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('frontend-tour.destroy', $tour) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</x-backend-layout>
-{{-- ======================================================================================================================================================= --}}
-
-<x-backend-layout>
     <div class="w-full flex flex-col gap-4">
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-semibold text-slate-800">Gallery</h1>
+                <h1 class="text-2xl font-semibold text-slate-800">Tour List</h1>
                 <div class="text-sm sm:text-base ">
                     <ol class="list-none p-0 inline-flex space-x-2">
                         <li class="flex items-center">
@@ -52,7 +11,7 @@
                             <p class="ml-2">/</p>
                         </li>
                         <li class="flex items-center">
-                            <p class="text-gray-800">Gallery</p>
+                            <p class="text-gray-800">Tour List</p>
                         </li>
                     </ol>
                 </div>
@@ -77,8 +36,12 @@
                 <tbody>
                     @foreach ($tours as $t)
                         <tr class="border-dashed border-t border-gray-200">
-                            <td class="p-2">{{ $loop->iteration }}</td>
-                            <td class="p-2">{{ $t->name }}</td>
+                            <td class="p-2">
+                                {{ $loop->iteration }}
+                            </td>
+                            <td class="p-2">
+                                {{ $t->name }}
+                            </td>
                             <td class="p-2">
                                 @if ($t->images->isNotEmpty())
                                     <!-- Cek apakah ada gambar terkait -->
@@ -91,10 +54,19 @@
                                 @endif
                             </td>
                             <td class="p-2">
+                                {{ $t->description }}
+                            </td>
+                            <td class="p-2">
+                                Rp. {{ number_format($t->price, 0, ',', '.') }}
+                            </td>
+                            <td class="p-2">
+                                <span class="text-yellow-500 text-xl">★</span> {{ $t->rating }}
+                            </td>
+
+                            <td class="p-2">
                                 <div class="flex gap-4 justify-center">
 
-                                    <a href="{{ route('frontend-tour.edit', $tour) }}"
-                                        class="bg-blue-500 icon-function">
+                                    <a href="{{ route('frontend-tour.edit', $t) }}" class="bg-blue-500 icon-function">
                                         <x-icons.icon type="edit" fill="#fff" width="20" height="20" />
                                     </a>
 

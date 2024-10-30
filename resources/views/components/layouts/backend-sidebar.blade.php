@@ -82,6 +82,12 @@
                         'icon' => 'dashboard',
                         'pattern' => 'admin/galleries*',
                     ],
+                    [
+                        'label' => 'Link List',
+                        'route' => 'links.index',
+                        'icon' => 'dashboard',
+                        'pattern' => 'admin/links*',
+                    ],
                 ];
             @endphp
 

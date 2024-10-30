@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\Tour\TransportationController;
 use App\Http\Controllers\Backend\Gallery\GalleryController;
 use App\Http\Controllers\Backend\Gallery\LocationController;
 use App\Http\Controllers\Backend\Homepage\FrontendTourController;
+use App\Http\Controllers\Backend\Homepage\LinkController;
 use App\Http\Controllers\Backend\Tour\TourImageController;
 use App\Http\Controllers\Frontend\GalleryFrontendController;
 use App\Http\Controllers\Frontend\TourFrontendController;
@@ -30,6 +31,8 @@ Route::get('/tentangkaka', function () {
 // });
 
 Route::get('/tour', [TourFrontendController::class, 'index'])->name('frontend.tours.index');
+
+
 
 // Route untuk frontend (Public)
 Route::get('/galleries', [GalleryFrontendController::class, 'index'])->name('frontend.galleries.index');
@@ -99,6 +102,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('locations', LocationController::class);
 
         Route::resource('frontend-tour', FrontendTourController::class);
+
+        Route::resource('links', LinkController::class);
     });
 });
 
