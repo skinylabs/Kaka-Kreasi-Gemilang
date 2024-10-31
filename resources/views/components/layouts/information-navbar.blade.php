@@ -41,6 +41,12 @@
                     Gallery
                 </p>
             </a>
+            <a href="{{ route('tatatertib', ['slug' => $tour->slug]) }}"
+                class="py-2 {{ request()->is('information/' . $tour->slug . '/tatatertib') ? 'bg-blue-500 text-white' : 'text-gray-800' }} rounded-lg px-4 w-full">
+                <p class="font-semibold">
+                    Tata Tertib
+                </p>
+            </a>
         </div>
         {{-- <form method="POST" action="{{ route('tour.logout') }}">
                 @csrf
@@ -48,7 +54,7 @@
             </form> --}}
         <form method="POST" action="{{ route('tour.logout') }}" class="w-full">
             @csrf
-            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100">
                 {{ __('Log Out') }}
             </button>
         </form>

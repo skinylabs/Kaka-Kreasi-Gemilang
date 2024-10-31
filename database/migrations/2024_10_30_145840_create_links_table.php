@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $table->string('name');       // Nama link, misalnya 'WhatsApp', 'Instagram'
-            $table->string('link');       // URL link, misalnya 'https://wa.me/123456789'
-            $table->string('type')->nullable();  // Tipe link, misalnya 'contact', 'social', dll.
+            $table->string('name');
+            $table->text('link');
             $table->string('description')->nullable(); // Deskripsi opsional
             $table->timestamps();
         });

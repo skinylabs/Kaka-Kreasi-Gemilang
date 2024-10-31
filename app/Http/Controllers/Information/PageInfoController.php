@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Information;
 
 use App\Http\Controllers\Controller;
+use App\Models\Link;
 use App\Models\Participant;
 use App\Models\Rundown;
+use App\Models\TataTertib;
 use App\Models\Tour;
 use App\Models\TourImage;
 use App\Models\Transportation;
@@ -72,7 +74,7 @@ class PageInfoController extends Controller
         $hasTransportation = $participants->contains('transportation', '!=', null);
         $hasRoomCode = $participants->contains('room_code', '!=', null);
 
-        return view('pages.information.transportation', [
+        return view('pages.information.pages.transportation', [
             'tour' => $tour,
             'slug' => $slug,
             'participants' => $participants,
@@ -102,7 +104,7 @@ class PageInfoController extends Controller
         });
 
         // Mengirim data ke view
-        return view('pages.information.rundown', [
+        return view('pages.information.pages.rundown', [
             'tour' => $tour,
             'slug' => $slug,
             'rundown' => $rundown,
@@ -133,13 +135,39 @@ class PageInfoController extends Controller
 
         $tourImages = $query->get();
 
-        return view('pages.information.galleries', [
+        return view('pages.information.pages.galleries', [
             'tour' => $tour,
             'slug' => $slug,
             'tourImages' => $tourImages,
             'title' => $tour->name,
             'category' => $category,
             'availableCategories' => $availableCategories,
+        ]);
+    }
+
+    public function tatatertib($slug, Request $request)
+    {
+        // Ambil data tour berdasarkan slug
+        $tour = Tour::where('slug', $slug)->firstOrFail();
+
+        // Ambil tata tertib yang terkait dengan tour ini
+        $tatatertib = $tour->tataTertib;
+
+        // Jika tata tertib tidak ada, Anda dapat mengarahkan pengguna atau memberikan pesan
+        if (!$tatatertib) {
+            return redirect()->back()->withErrors(['message' => 'Tata Tertib tidak ditemukan.']);
+        }
+
+        // Ambil rules yang terkait dengan tata tertib ini
+        $rules = $tatatertib->rules;
+
+        // Kirim data tour, tata tertib, dan rules ke view
+        return view('pages.information.pages.tatatertib', [
+            'tour' => $tour,
+            'slug' => $slug,
+            'title' => $tour->name,
+            'tatatertib' => $tatatertib,
+            'rules' => $rules,
         ]);
     }
 }

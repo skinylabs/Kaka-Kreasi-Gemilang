@@ -22,10 +22,16 @@
 
     <x-layouts.frontend-footer />
 
+    <!-- Ikon WhatsApp di pojok kanan bawah -->
+    @if ($contact->where('name', 'Whatsapp')->isNotEmpty())
+        <a href="{{ $contact->where('name', 'Whatsapp')->first()->link }}" target="_blank" rel="noopener noreferrer"
+            class="fixed bottom-4 right-4 bg-green-500 p-3 rounded-full shadow-lg hover:bg-green-600 transition">
+            <x-icons.icon type="Whatsapp" class="w-6 h-6 lg:w-12 lg:h-12 fill-current text-white" />
+        </a>
+    @endif
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
 
 </body>
 

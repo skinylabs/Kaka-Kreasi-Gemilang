@@ -32,10 +32,9 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:64',
             'link' => 'required|url',
-            'type' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:500',
+            'description' => 'nullable|string|max:255',
         ]);
 
         Link::create($validatedData);
@@ -65,10 +64,9 @@ class LinkController extends Controller
     public function update(Request $request, Link $link)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:64',
             'link' => 'required|url',
-            'type' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:500',
+            'description' => 'nullable|string|max:255',
         ]);
 
         $link->update($validatedData);

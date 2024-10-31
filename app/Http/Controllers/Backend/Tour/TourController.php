@@ -59,7 +59,7 @@ class TourController extends Controller
             'end_date' => $request->end_date,
             'user_id' => $request->user_id,
             'tata_tertib_id' => $request->tata_tertib_id,
-            'security_password' => bcrypt($request->security_password),
+            'security_password' => $request->security_password,
         ]);
 
         // Tambahkan Tata Tertib sesuai pilihan

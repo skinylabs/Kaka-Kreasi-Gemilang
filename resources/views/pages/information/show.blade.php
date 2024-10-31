@@ -55,23 +55,23 @@
                     Rundown
                 </h1>
             </a>
-            <a href="{{ route('rundown', ['slug' => $tour->slug]) }}"
+            <a href="{{ route('galleries', ['slug' => $tour->slug]) }}"
                 class="block relative w-full h-32 overflow-hidden rounded-xl">
                 <img src="{{ asset('images/barcode/rundown.webp') }}" alt="" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black opacity-50"></div>
                 <h1
                     class="absolute inset-0 flex items-center justify-center text-white font-bold text-xl uppercase text-center">
-                    Kelompok Kamar
+                    Gallery
                 </h1>
             </a>
-            <a href="{{ route('rundown', ['slug' => $tour->slug]) }}"
+            <a href="{{ route('tatatertib', ['slug' => $tour->slug]) }}"
                 class="block relative w-full h-32 overflow-hidden rounded-xl">
                 <img src="{{ asset('images/barcode/rundown.webp') }}" alt=""
                     class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-black opacity-50"></div>
                 <h1
                     class="absolute inset-0 flex items-center justify-center text-white font-bold text-xl uppercase text-center">
-                    Gallery
+                    Tata Tertib
                 </h1>
             </a>
         </div>

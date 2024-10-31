@@ -31,9 +31,10 @@
 
         <label for="image_tag">Tag Gambar:</label>
         <select name="image_tag">
-            <option value="activity">Activity</option>
+            <option value="pemandangan">Pemandangan</option>
             <option value="hotel">Hotel</option>
             <option value="transportation">Transportation</option>
+            <option value="aktifitas">Aktifitas</option>
         </select>
 
         <button type="submit">Unggah Gambar</button>

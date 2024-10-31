@@ -2,7 +2,6 @@
     <div class="flex justify-between items-center mb-6">
         <div>
             <h1 class="text-2xl font-semibold text-slate-800">Edit Tour</h1>
-
             <div class="text-sm sm:text-base">
                 <ol class="list-none p-0 inline-flex space-x-2">
                     <li class="flex items-center">
@@ -27,7 +26,6 @@
         @csrf
         @method('PUT')
         <div class="flex flex-col gap-4">
-
             <div>
                 <label for="name" class="label">Tour Name:</label>
                 <input type="text" name="name" id="name" class="textInput" value="{{ $tour->name }}"
@@ -57,7 +55,7 @@
                 <div class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 cursor-pointer"
                     id="custom-tata-tertib-select">
                     <span
-                        id="selected-tata-tertib">{{ $tour->tata_tertib_id ? $tour->tataTertib->title : '-- Gunakan Tata Tertib Default --' }}</span>
+                        id="selected-tata-tertib">{{ $tour->tataTertib->title ?? '-- Gunakan Tata Tertib Default --' }}</span>
                 </div>
                 <div class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 hidden"
                     id="tata-tertib-options">
@@ -69,12 +67,12 @@
                 </div>
             </div>
             <input type="hidden" name="tata_tertib_id" id="tata_tertib_id" value="{{ $tour->tata_tertib_id }}">
-            <input type="hidden" name="user_id" id="user_id" value="{{ $tour->user_id }}" required>
+
             <div class="relative inline-block w-full text-gray-700">
                 <label for="user" class="label">User:</label>
                 <div class="block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 cursor-pointer"
                     id="custom-select">
-                    <span id="selected-user">{{ $tour->user->name }}</span>
+                    <span id="selected-user">{{ $tour->user->name ?? '-- Select User --' }}</span>
                 </div>
                 <div class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 hidden" id="options">
                     @foreach ($users as $user)
@@ -84,6 +82,17 @@
                     @endforeach
                 </div>
             </div>
+            <input type="hidden" name="user_id" id="user_id" value="{{ $tour->user_id }}">
+
+            <div>
+                <label for="security_password" class="label">Pass Code:</label>
+                <div class="relative">
+                    <input type="password" name="security_password" id="security_password" class="textInput"
+                        value="{{ old('security_password', $tour->security_password) }}" required>
+                    <span toggle="#security_password" class="absolute right-3 top-3 cursor-pointer"
+                        id="togglePassword">👁️</span>
+                </div>
+            </div>
 
             <div class="flex justify-end">
                 <button type="submit" class="button-primary w-[20%]">Update Tour</button>
@@ -91,10 +100,18 @@
         </div>
     </form>
 
-
     @section('script')
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                const togglePassword = document.getElementById("togglePassword");
+                const passwordInput = document.getElementById("security_password");
+
+                togglePassword.addEventListener("click", function() {
+                    const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                    passwordInput.setAttribute("type", type);
+                    this.innerText = type === "password" ? "👁️" : "🙈";
+                });
+
                 const customSelect = document.getElementById("custom-select");
                 const optionsContainer = document.getElementById("options");
                 const selectedUser = document.getElementById("selected-user");
@@ -112,20 +129,16 @@
                         selectedUser.innerText = name;
                         hiddenInput.value = value;
                     }
-
                     optionsContainer.classList.add("hidden");
                 });
 
-                // Prevent form submit if user is not selected
                 document.querySelector("form").addEventListener("submit", function(event) {
                     if (!hiddenInput.value) {
                         alert('Please select a user.');
-                        event.preventDefault(); // Stop form from submitting
+                        event.preventDefault();
                     }
                 });
-            });
 
-            document.addEventListener("DOMContentLoaded", function() {
                 const customTataTertibSelect = document.getElementById("custom-tata-tertib-select");
                 const tataTertibOptionsContainer = document.getElementById("tata-tertib-options");
                 const selectedTataTertib = document.getElementById("selected-tata-tertib");
@@ -143,16 +156,7 @@
                         selectedTataTertib.innerText = name;
                         hiddenTataTertibInput.value = value;
                     }
-
                     tataTertibOptionsContainer.classList.add("hidden");
-                });
-
-                // Optional: validasi jika diperlukan
-                document.querySelector("form").addEventListener("submit", function(event) {
-                    if (!hiddenTataTertibInput.value) {
-                        alert('Please select a Tata Tertib.');
-                        event.preventDefault(); // Stop form from submitting
-                    }
                 });
             });
         </script>

@@ -15,15 +15,7 @@
                 <label for="description" class="form-label">Deskripsi</label>
                 <textarea class="form-control" name="description" required></textarea>
             </div>
-            <div class="mb-3">
-                <label for="type" class="form-label">Kategori</label>
-                <select class="form-select" name="type" required>
-                    <option value="Tutorial">Tutorial</option>
-                    <option value="Berita">Berita</option>
-                    <option value="Sumber Daya">Sumber Daya</option>
-                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
-                </select>
-            </div>
+
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>
     </div>

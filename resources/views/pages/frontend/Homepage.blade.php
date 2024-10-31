@@ -1,4 +1,4 @@
-<x-frontend-layout>
+<x-frontend-layout :contact="$contact">
     <section class="swiper " id="homepageSlider">
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
@@ -359,7 +359,7 @@
             <p class="text-xs ">
                 Segera hubungi kami dan akan kami bantu sepenuh hati
             </p>
-            <a href="#" class="w-full flex justify-center">
+            <a href="/contact" class="w-full flex justify-center">
                 <div class="m-2 text-pink-500 bg-white p-2 rounded-lg w-[50%] font-bold">
                     Hubungi Kami
                 </div>

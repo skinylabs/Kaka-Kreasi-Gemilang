@@ -16,23 +16,23 @@ use App\Http\Controllers\Backend\Gallery\LocationController;
 use App\Http\Controllers\Backend\Homepage\FrontendTourController;
 use App\Http\Controllers\Backend\Homepage\LinkController;
 use App\Http\Controllers\Backend\Tour\TourImageController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\GalleryFrontendController;
 use App\Http\Controllers\Frontend\TourFrontendController;
 use App\Http\Controllers\Information\PageInfoController;
+use App\Models\Link;
 
 Route::get('/', function () {
     return view('pages.frontend.homepage');
 });
+
 Route::get('/tentangkaka', function () {
     return view('pages.frontend.tentangkaka');
 });
-// Route::get('/tour', function () {
-//     return view('pages.frontend.tour');
-// });
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
 Route::get('/tour', [TourFrontendController::class, 'index'])->name('frontend.tours.index');
-
-
 
 // Route untuk frontend (Public)
 Route::get('/galleries', [GalleryFrontendController::class, 'index'])->name('frontend.galleries.index');
@@ -59,6 +59,8 @@ Route::middleware(['user'])->group(function () {
         Route::get('/{slug}/rundown', [PageInfoController::class, 'rundown'])->name('rundown');
 
         Route::get('/{slug}/galleries', [PageInfoController::class, 'galleries'])->name('galleries');
+
+        Route::get('/{slug}/tatatertib', [PageInfoController::class, 'tatatertib'])->name('tatatertib');
 
         // Logout route
         Route::post('/logout', [InfoAuthController::class, 'logout'])->name('tour.logout');

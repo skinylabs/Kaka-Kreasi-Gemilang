@@ -20,7 +20,8 @@ class InfoAuthController extends Controller
         $tour = Tour::where('security_password', '!=', null)->get();
 
         foreach ($tour as $t) {
-            if (Hash::check($request->password, $t->security_password)) {
+            // Cek apakah password yang dimasukkan sama dengan password di database
+            if ($request->password === $t->security_password) {
                 // Menyimpan status login dan slug tour di session
                 $request->session()->put('logged_in', true);
                 $request->session()->put('tour_slug', $t->slug); // Simpan slug tour
@@ -33,6 +34,7 @@ class InfoAuthController extends Controller
         // Jika tidak ada yang cocok, kembali dengan pesan error
         return back()->withErrors(['password' => 'Password salah!']);
     }
+
 
     // Fungsi untuk logout
     public function logout(Request $request)
