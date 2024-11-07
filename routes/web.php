@@ -19,12 +19,11 @@ use App\Http\Controllers\Backend\Tour\TourImageController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\GalleryFrontendController;
 use App\Http\Controllers\Frontend\TourFrontendController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Information\PageInfoController;
 use App\Models\Link;
 
-Route::get('/', function () {
-    return view('pages.frontend.homepage');
-});
+Route::get('/', [HomepageController::class, 'index']);
 
 Route::get('/tentangkaka', function () {
     return view('pages.frontend.tentangkaka');

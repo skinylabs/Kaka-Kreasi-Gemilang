@@ -1,7 +1,10 @@
 <header id="header" class="bg-white z-50 fixed w-full top-0 py-4">
     <nav class="flex justify-between items-center w-[92%] mx-auto">
-        <a href="/">
-            <img class="w-28 cursor-pointer" src="{{ asset('images/logo/kakatour.webp') }}" alt="...">
+        <a href="/" class="flex items-center gap-2">
+            <img class="w-8 cursor-pointer" src="{{ asset('images/logo/logo-aja.webp') }}" alt="...">
+            <span class="font-bold text-slate-800">
+                PT. KAKA KREASI GEMILANG
+            </span>
         </a>
 
         <div
@@ -30,7 +33,7 @@
                     <ul id="dropdown-menu"
                         class="absolute left-0 top-full mt-2 bg-white shadow-lg rounded-lg hidden flex-col min-w-[150px] z-50">
                         <li>
-                            <a class="block px-4 py-2 hover:bg-gray-100" href="/gallery">Gallery</a>
+                            <a class="block px-4 py-2 hover:bg-gray-100" href="/galleries">Gallery</a>
                         </li>
                         <li>
                             <a class="block px-4 py-2 hover:bg-gray-100" href="/sewa-kendaraan">Sewa Kendaraan</a>
@@ -55,53 +58,47 @@
     const overlay = document.getElementById('overlay');
     const header = document.getElementById('header');
     const menuIcon = document.getElementById('menu-icon');
-    const body = document.body; // Akses ke body
+    const body = document.body;
     const dropdownBtn = document.getElementById('dropdown-btn');
     const dropdownMenu = document.getElementById('dropdown-menu');
     const arrowIcon = document.getElementById('arrow-icon');
 
     function onToggleMenu(e) {
         e.name = e.name === 'menu' ? 'close' : 'menu';
-        navLinks.classList.toggle('left-0'); // Tampilkan menu dari kiri
-        navLinks.classList.toggle('left-[-100%]'); // Sembunyikan menu ke kiri
-        overlay.classList.toggle('hidden'); // Tampilkan atau sembunyikan overlay
+        navLinks.classList.toggle('left-0');
+        navLinks.classList.toggle('left-[-100%]');
+        overlay.classList.toggle('hidden');
 
-        // Ubah header background saat menu aktif
         if (navLinks.classList.contains('left-0')) {
             header.classList.remove('bg-white');
             header.classList.add('bg-transparent');
-            menuIcon.style.color = 'red'; // Ganti warna icon menjadi merah
-            body.classList.add('overflow-hidden'); // Kunci scroll saat menu aktif
+            menuIcon.style.color = 'red';
+            body.classList.add('overflow-hidden');
         } else {
             header.classList.remove('bg-transparent');
             header.classList.add('bg-white');
-            menuIcon.style.color = 'black'; // Ganti warna icon kembali ke hitam
-            body.classList.remove('overflow-hidden'); // Aktifkan kembali scroll
+            menuIcon.style.color = 'black';
+            body.classList.remove('overflow-hidden');
         }
     }
 
-    // Menutup menu saat mengklik overlay
     overlay.addEventListener('click', function() {
         navLinks.classList.add('left-[-100%]');
         navLinks.classList.remove('left-0');
         overlay.classList.add('hidden');
         header.classList.remove('bg-transparent');
         header.classList.add('bg-white');
-        menuIcon.style.color = 'black'; // Ganti warna icon kembali ke hitam
-        body.classList.remove('overflow-hidden'); // Aktifkan kembali scroll
+        menuIcon.style.color = 'black';
+        body.classList.remove('overflow-hidden');
     });
 
-    // Toggle dropdown saat tombol diklik (hanya untuk desktop)
     if (dropdownBtn) {
         dropdownBtn.addEventListener('click', function() {
-            dropdownMenu.classList.toggle('hidden'); // Tampilkan atau sembunyikan dropdown
-
-            // Rotasi ikon panah saat dropdown aktif
+            dropdownMenu.classList.toggle('hidden');
             arrowIcon.classList.toggle('rotate-180');
         });
     }
 
-    // Mengatur menu mobile
     function setupMobileMenu() {
         const dropdownItems = `
             <li><a class="hover:text-gray-500" href="/galleries">Gallery</a></li>
@@ -114,11 +111,21 @@
             ${dropdownItems}
             <li><a class="hover:text-gray-500" href="/contact">Contact</a></li>
         `;
-        navLinks.querySelector('ul').innerHTML = menuItems; // Ganti konten menu dengan menu mobile
+        navLinks.querySelector('ul').innerHTML = menuItems;
     }
 
-    // Panggil fungsi untuk menyiapkan menu mobile
     if (window.innerWidth < 768) {
         setupMobileMenu();
     }
+
+    // Menambahkan shadow pada header saat di-scroll
+    window.addEventListener('scroll', function() {
+        if (window.innerWidth >= 768) { // Hanya untuk tablet/desktop
+            if (window.scrollY > 50) {
+                header.classList.add('shadow');
+            } else {
+                header.classList.remove('shadow');
+            }
+        }
+    });
 </script>

@@ -30,11 +30,11 @@
         </div>
     </section>
 
-    <section class="mt-8">
+    <section class="mt-8 md:mt-16">
         <div class="w-full flex justify-between items-center">
             <div>
-                <p class="text-pink-500 font-semibold">WISATA TERBAIK</p>
-                <h1 class="text-2xl font-bold">Mulai Perjalanan Anda</h1>
+                <p class="text-pink-500 font-semibold md:text-2xl">WISATA TERBAIK</p>
+                <h1 class="text-2xl font-bold md:text-4xl">Mulai Perjalanan Anda</h1>
             </div>
 
             <!-- Tombol untuk Mobile -->
@@ -44,7 +44,7 @@
             </a>
 
             <!-- Tombol untuk Tablet dan Desktop -->
-            <a href="#" class="seeMoreButton hidden md:flex items-center relative overflow-hidden">
+            <a href="/tour" class="seeMoreButton hidden md:flex items-center relative overflow-hidden">
                 <span class="mr-2">Lihat Selengkapnya</span>
                 <svg class="transition-transform duration-300 ease-in-out animate-swing" width="15px" height="10px"
                     viewBox="0 0 13 10">
@@ -54,73 +54,89 @@
             </a>
         </div>
 
-        {{-- Mobile Layout (Swiper) --}}
-        <div class="md:hidden">
-            <div class="swiper mt-4" id="wisataTerbaikSlider">
-                <div class="swiper-wrapper">
-                    @for ($i = 0; $i < 10; $i++)
-                        <a href="#" class="swiper-slide overflow-visible">
-                            <div class="relative hover:scale-105 transition-all duration-300 ease-in-out">
-                                <!-- H1 di pojok kiri atas -->
-                                <h1
-                                    class="absolute top-2 left-2 text-white font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
-                                    Bali
-                                </h1>
-                                <img src="{{ asset('images/carousel/bali1.webp') }}" alt="Image {{ $i + 1 }}"
-                                    class="rounded-lg w-full h-auto" />
-                                <!-- Rating di pojok kanan bawah -->
-                                <div
-                                    class="absolute bottom-2 right-2 text-yellow-500 font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
-                                    ★★★★★
+        {{-- Cek apakah terdapat tour --}}
+        @if ($tours->isEmpty())
+            <p class="mt-4 text-center text-gray-500">Belum ada tour</p>
+        @else
+            {{-- Mobile Layout (Swiper) --}}
+            <div class="md:hidden">
+                <div class="swiper mt-4" id="wisataTerbaikSlider">
+                    <div class="swiper-wrapper">
+                        @foreach ($tours as $tour)
+                            <a href="#" class="swiper-slide overflow-visible">
+                                <div class="relative hover:scale-105 transition-all duration-300 ease-in-out">
+                                    <!-- H1 di pojok kiri atas -->
+                                    <h1
+                                        class="absolute top-2 left-2 text-white font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
+                                        {{ $tour->name }}
+                                    </h1>
+                                    <img src="{{ asset('images/carousel/bali1.webp') }}"
+                                        alt="Image {{ $loop->index + 1 }}" class="rounded-lg w-full h-auto" />
+                                    <!-- Rating di pojok kanan bawah -->
+                                    <div
+                                        class="absolute bottom-2 right-2 text-yellow-500 font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
+                                        ★★★★★
+                                    </div>
                                 </div>
+                            </a>
+                        @endforeach
+
+                        <!-- Card terakhir: Lihat Semua Tour -->
+                        <a href="/tour" class="swiper-slide overflow-visible">
+                            <div
+                                class="relative hover:scale-105 transition-all duration-300 ease-in-out bg-blue-500 text-white rounded-lg h-full flex items-center justify-center">
+                                <span class="text-lg font-bold">Lihat Semua Tour</span>
                             </div>
                         </a>
-                    @endfor
-
-                    <!-- Card terakhir: Lihat Semua Tour -->
-                    <a href="#" class="swiper-slide overflow-visible">
-                        <div
-                            class="relative hover:scale-105 transition-all duration-300 ease-in-out bg-blue-500 text-white rounded-lg h-full flex items-center justify-center">
-                            <span class="text-lg font-bold">Lihat Semua Tour</span>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        {{-- Desktop Layout (Grid) --}}
-        <div class="hidden md:grid grid-cols-4 gap-6 mt-4">
-            @for ($i = 0; $i < 8; $i++)
-                <a href="#" class="overflow-visible">
-                    <div class="relative hover:scale-105 transition-all duration-300 ease-in-out">
-                        <!-- H1 di pojok kiri atas -->
-                        <h1 class="absolute top-2 left-2 text-white font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
-                            Bali
-                        </h1>
-                        <img src="{{ asset('images/carousel/bali1.webp') }}" alt="Image {{ $i + 1 }}"
-                            class="rounded-lg w-full h-auto" />
-                        <!-- Rating di pojok kanan bawah -->
-                        <div
-                            class="absolute bottom-2 right-2 text-yellow-500 font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
-                            ★★★★★
+            {{-- Desktop Layout (Grid) --}}
+            <div class="hidden md:grid grid-cols-4 gap-6 mt-4">
+                @foreach ($tours as $tour)
+                    <a href="#" class="overflow-visible">
+                        <div class="relative hover:scale-105 transition-all duration-300 ease-in-out">
+                            <!-- H1 di pojok kiri atas -->
+                            <h1
+                                class="absolute top-2 left-2 text-white font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
+                                {{ $tour->name }}
+                            </h1>
+
+                            @if ($tour->images->isNotEmpty())
+                                @foreach ($tour->images as $image)
+                                    <img src="{{ asset('storage/' . $image->path) }}" alt="{{ $tour->name }}"
+                                        class="rounded-lg w-full h-auto object-cover" />
+                                @endforeach
+                            @else
+                                <span>No Image</span>
+                            @endif
+
+                            <!-- Rating di pojok kanan bawah -->
+                            <div
+                                class="absolute bottom-2 right-2 text-yellow-500 font-bold bg-black bg-opacity-50 px-2 py-1 rounded">
+                                ★ {{ $tour->rating }}
+                            </div>
                         </div>
-                    </div>
-                </a>
-            @endfor
-        </div>
+                    </a>
+                @endforeach
+            </div>
+        @endif
     </section>
 
 
 
 
-    <section class="w-full flex flex-col justify-center items-center mt-8 md:flex-row">
+
+    <section
+        class="w-full flex flex-col justify-center items-center mt-8 md:flex-row md:justify-between md:mt-16 md:mb-16">
         <!-- Gambar (Elemen Kiri) -->
-        <div class="w-full md:w-2/5">
+        <div class="w-full md:w-2/6">
             <div
-                class="bg-yellow-400 h-64 w-full -mx-4 rounded-r-full overflow-visible flex justify-center items-center">
+                class="bg-yellow-400 h-64 w-full -mx-12 rounded-r-full overflow-visible flex justify-center items-center md:h-full">
                 <div>
                     <img src="{{ asset('images/girl-sparcle.webp') }}" alt="Girl Sparkle"
-                        class="w-80 h-auto object-cover rounded-lg" />
+                        class="w-80 h-auto object-cover rounded-lg md:w-full" />
                 </div>
             </div>
         </div>
@@ -128,39 +144,40 @@
         <!-- Teks (Elemen Kanan) -->
         <div class="w-full md:w-3/5 flex flex-col justify-center gap-6 md:text-left md:gap-8">
             <div>
-                <p class="text-pink-500 font-semibold">KAKA TOUR</p>
-                <h1 class="text-2xl font-bold">Solusi Kebutuhan Wisata Anda!</h1>
-                <p class="text-xs text-slate-500">Kami siap memenuhi segala kebutuhan wisata Anda dengan layanan terbaik
+                <p class="text-pink-500 font-semibold md:text-2xl">KAKA TOUR</p>
+                <h1 class="text-2xl font-bold md:text-4xl">Solusi Kebutuhan Wisata Anda!</h1>
+                <p class="text-xs text-slate-500 md:text-base">Kami siap memenuhi segala kebutuhan wisata Anda dengan
+                    layanan terbaik
                     untuk pengalaman liburan yang tak terlupakan.</p>
             </div>
             <div class="w-full md:w-3/4">
                 <div class="grid grid-cols-2 gap-4 text-center">
                     <div class="border border-pink-700 p-2 rounded-lg  w-full">
-                        <h1 class="font-bold text-xl text-slate-800">700+</h1>
-                        <p class="text-sm">Destinasi Wisata</p>
+                        <h1 class="font-bold text-xl text-slate-800 md:text-2xl">700+</h1>
+                        <p class="text-sm md:text-base">Destinasi Wisata</p>
                     </div>
                     <div class="border border-pink-700 p-2 rounded-lg w-full">
-                        <h1 class="font-bold text-xl text-slate-800">2K+</h1>
-                        <p class="text-sm">Happy Customers</p>
+                        <h1 class="font-bold text-xl text-slate-800 md:text-2xl">2K+</h1>
+                        <p class="text-sm md:text-base">Happy Customers</p>
                     </div>
                     <div class="border border-pink-700 p-2 rounded-lg w-full">
-                        <h1 class="font-bold text-xl text-slate-800">500+</h1>
-                        <p class="text-sm">Paket Liburan</p>
+                        <h1 class="font-bold text-xl text-slate-800 md:text-2xl">500+</h1>
+                        <p class="text-sm md:text-base">Paket Liburan</p>
                     </div>
                     <div class="border border-pink-700 p-2 rounded-lg w-full">
-                        <h1 class="font-bold text-xl text-slate-800">100</h1>
-                        <p class="text-sm">Luxury Hotel</p>
+                        <h1 class="font-bold text-xl text-slate-800 md:text-2xl">100</h1>
+                        <p class="text-sm md:text-base">Luxury Hotel</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="block md:hidden mt-12">
+    <section class="block md:hidden mt-12 ">
         <div class="flex flex-col">
             <!-- Teks -->
             <div class="md:w-1/2">
-                <p class="text-pink-500 font-semibold">FITUR UTAMA</p>
-                <h1 class="text-2xl font-bold">Tawaran Yang Kami Berikan</h1>
+                <p class="text-pink-500 font-semibold md:text-2xl">FITUR UTAMA</p>
+                <h1 class="text-2xl font-bold md:text-4xl">Tawaran Yang Kami Berikan</h1>
             </div>
 
             <div class="mt-8" x-data="{
@@ -222,12 +239,12 @@
             </div>
         </div>
     </section>
-    <section class="hidden md:block mt-12">
+    <section class="hidden md:block mt-12 md:mt-16">
         <div class="flex flex-col ">
             <!-- Teks -->
             <div class="md:w-1/2">
-                <p class="text-pink-500 font-semibold">FITUR UTAMA</p>
-                <h1 class="text-2xl font-bold">Tawaran Yang Kami Berikan</h1>
+                <p class="text-pink-500 font-semibold md:text-2xl">FITUR UTAMA</p>
+                <h1 class="text-2xl font-bold md:text-4xl">Tawaran Yang Kami Berikan</h1>
             </div>
             <div class="mt-8" x-data="{
                 cards: [{
@@ -279,8 +296,8 @@
                             </div>
                             <!-- Content Section -->
                             <div>
-                                <h1 class="font-bold" x-text="card.title"></h1>
-                                <p class="text-xs text-slate-600" x-text="card.description"></p>
+                                <h1 class="font-bold md:text-xl" x-text="card.title"></h1>
+                                <p class="text-xs text-slate-600 md:text-base" x-text="card.description"></p>
                             </div>
                         </div>
                     </template>
@@ -288,83 +305,88 @@
             </div>
         </div>
     </section>
-    <section class="mt-8">
+    <section class="mt-8 md:mt-16" x-data="{
+        testimonials: [{
+                name: 'John Doe',
+                review: 'Layanan sangat baik dan pengalaman wisata yang luar biasa!',
+                rating: 5,
+                image: '{{ asset('images/testimonials/profile1.jpg') }}'
+            },
+            {
+                name: 'Jane Smith',
+                review: 'Sangat puas dengan fasilitas dan pelayanan tur ini!',
+                rating: 5,
+                image: '{{ asset('images/testimonials/profile2.jpg') }}'
+            },
+            {
+                name: 'Sarah Lee',
+                review: 'Pengalaman yang tidak akan terlupakan!',
+                rating: 5,
+                image: '{{ asset('images/testimonials/profile3.jpg') }}'
+            }
+        ]
+    }">
         <div class="md:w-1/2 mb-4">
-            <p class="text-pink-500 font-semibold">TESTIMONI</p>
-            <h1 class="text-2xl font-bold">Apa Kata Mereka?</h1>
+            <p class="text-pink-500 font-semibold md:text-2xl">TESTIMONI</p>
+            <h1 class="text-2xl font-bold md:text-4xl">Apa Kata Mereka?</h1>
         </div>
 
         <!-- Swiper Slider untuk Testimoni -->
         <div class="swiper testimonialSwiper" id="testimonialSwiper">
             <div class="swiper-wrapper">
-
-                <!-- Slide 1 -->
-                <div class="swiper-slide flex flex-col items-center text-center">
-                    <div class="w-full flex justify-center">
-                        <img src="{{ asset('images/testimonials/profile1.jpg') }}" alt="Profile 1"
-                            class="w-16 h-16 rounded-full object-cover mb-4">
+                <!-- Looping melalui setiap testimoni -->
+                <template x-for="testimonial in testimonials" :key="testimonial.name">
+                    <div class="swiper-slide flex flex-col items-center text-center">
+                        <!-- Gambar Profil -->
+                        <div class="w-full flex justify-center">
+                            <img :src="testimonial.image" alt="Profile Image"
+                                class="w-16 h-16 rounded-full object-cover mb-4">
+                        </div>
+                        <!-- Nama -->
+                        <h2 class="font-semibold text-lg md:text-2xl" x-text="testimonial.name"></h2>
+                        <!-- Rating -->
+                        <div class="flex items-center justify-center mt-2 mb-4 text-yellow-500">
+                            <template x-for="star in Array.from({ length: testimonial.rating })"
+                                :key="star">
+                                <span>★</span>
+                            </template>
+                            <template x-for="emptyStar in Array.from({ length: 5 - testimonial.rating })"
+                                :key="emptyStar">
+                                <span>☆</span>
+                            </template>
+                        </div>
+                        <!-- Review -->
+                        <p class="text-gray-500 italic md:text-2xl" x-text="testimonial.review"></p>
                     </div>
-                    <h2 class="font-semibold text-lg">John Doe</h2>
-                    <div class="flex items-center justify-center mt-2 mb-4 text-yellow-500">
-                        <span>★★★★★</span>
-                    </div>
-                    <p class="text-gray-500 italic">"Layanan sangat baik dan pengalaman wisata yang luar biasa!"
-                    </p>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="swiper-slide flex flex-col items-center text-center">
-                    <div class="w-full flex justify-center">
-                        <img src="{{ asset('images/testimonials/profile2.jpg') }}" alt="Profile 2"
-                            class="w-16 h-16 rounded-full object-cover mb-4">
-                    </div>
-                    <h2 class="font-semibold text-lg">Jane Smith</h2>
-                    <div class="flex items-center justify-center mt-2 mb-4 text-yellow-500">
-                        <span>★★★★☆</span>
-                    </div>
-                    <p class="text-gray-500 italic">"Sangat puas dengan fasilitas dan pelayanan tur ini!"</p>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="swiper-slide flex flex-col items-center text-center">
-                    <div class="w-full flex justify-center">
-                        <img src="{{ asset('images/testimonials/profile3.jpg') }}" alt="Profile 3"
-                            class="w-16 h-16 rounded-full object-cover mb-4">
-                    </div>
-                    <h2 class="font-semibold text-lg">Sarah Lee</h2>
-                    <div class="flex items-center justify-center mt-2 mb-4 text-yellow-500">
-                        <span>★★★★★</span>
-                    </div>
-                    <p class="text-gray-500 italic">"Pengalaman yang tidak akan terlupakan!"</p>
-                </div>
-
+                </template>
             </div>
 
-            <!-- Navigation -->
-
+            <!-- Navigasi -->
             <div class="testimonial-swiper-button-next">
                 <ion-icon name="chevron-back-outline" class="text-lg"></ion-icon>
             </div>
             <div class="testimonial-swiper-button-prev">
                 <ion-icon name="chevron-forward-outline" class="text-lg"></ion-icon>
             </div>
-
         </div>
     </section>
-    <section class="flex flex-col  mt-8 mx-0">
-        <div class="bg-gradient-to-r from-[#EC4899] to-[#FDE047] p-4 rounded-lg text-white text-center">
-            <h1 class="text-xl font-bold">
+
+    <section class="flex flex-col  mt-8 mx-0 md:mt-16">
+        <div
+            class="bg-gradient-to-r from-[#EC4899] to-[#FDE047] p-4 rounded-lg text-white text-center md:h-full md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:p-8">
+            <h1 class="text-xl font-bold md:text-4xl">
                 Ingin tau lebih tentang kami?
             </h1>
-            <p class="text-xs ">
+            <p class="text-xs md:text-2xl">
                 Segera hubungi kami dan akan kami bantu sepenuh hati
             </p>
             <a href="/contact" class="w-full flex justify-center">
-                <div class="m-2 text-pink-500 bg-white p-2 rounded-lg w-[50%] font-bold">
-                    Hubungi Kami
+                <div
+                    class="m-2 flex gap-2 justify-center items-center text-pink-500 bg-white p-2 rounded-lg w-[50%] font-bold md:text-2xl ">
+                    {{-- <x-icons.icon type="phone" class="fill-pink-500 md:w-8 md:h-8" /> --}}
+                    <span>Hubungi Kami</span>
                 </div>
             </a>
-
         </div>
     </section>
 

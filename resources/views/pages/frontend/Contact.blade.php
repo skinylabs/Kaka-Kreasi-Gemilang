@@ -1,17 +1,21 @@
 <x-frontend-layout>
-    <x-ui.headingBanner title="Hubungi Kami" image="images/carousel/bali2.webp" />
+    <x-ui.headingBanner title="Hubungi Kami" image="images/header/contact-us.webp" />
 
     <section class="mt-4 lg:mt-8">
         <div class="flex flex-col gap-8">
-            <div class="grid lg:grid-cols-3 gap-2">
+            <div>
+                <p class="text-pink-500 font-semibold">STALKING-IN</p>
+                <h1 class="text-2xl font-bold">Sosial Media Kami</h1>
+            </div>
+            <div class="grid lg:grid-cols-4 gap-2">
                 @php
                     // Array warna yang akan digunakan untuk setiap item
-                    $colors = ['bg-pink-500', 'bg-slate-800', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500'];
+                    $colors = ['bg-green-500', 'bg-rose-500', 'bg-slate-800', 'bg-blue-500', 'bg-purple-500'];
                     $iconColors = [
-                        'text-pink-500',
-                        'text-slate-800',
                         'text-green-500',
-                        'text-yellow-500',
+                        'text-rose-500',
+                        'text-slate-800',
+                        'text-blue-500',
                         'text-purple-500',
                     ];
                 @endphp
@@ -32,7 +36,10 @@
                     @endif
                 @endforeach
             </div>
-
+            <div>
+                <p class="text-pink-500 font-semibold">KUNJUNGI</p>
+                <h1 class="text-2xl font-bold">Lokasi Kami</h1>
+            </div>
             <div>
                 <iframe src="{{ $contact->where('name', 'Maps')->first()->link ?? '' }}" style="border:0;"
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"

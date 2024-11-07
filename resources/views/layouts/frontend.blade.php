@@ -16,7 +16,7 @@
 <body>
     <x-layouts.frontend-navbar />
 
-    <main class="pt-16 px-4 ">
+    <main class="pt-16 px-4 md:px-12 ">
         {{ $slot }}
     </main>
 
@@ -25,8 +25,8 @@
     <!-- Ikon WhatsApp di pojok kanan bawah -->
     @if ($contact->where('name', 'Whatsapp')->isNotEmpty())
         <a href="{{ $contact->where('name', 'Whatsapp')->first()->link }}" target="_blank" rel="noopener noreferrer"
-            class="fixed bottom-4 right-4 bg-green-500 p-3 rounded-full shadow-lg hover:bg-green-600 transition">
-            <x-icons.icon type="Whatsapp" class="w-6 h-6 lg:w-12 lg:h-12 fill-current text-white" />
+            class="fixed bottom-4 right-4 bg-green-500 p-2 rounded-full shadow-lg hover:bg-green-600 transition">
+            <x-icons.icon type="Whatsapp" class="w-6 h-6 lg:w-8 lg:h-8 fill-current text-white" />
         </a>
     @endif
 
