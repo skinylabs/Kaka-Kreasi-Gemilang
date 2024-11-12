@@ -2,12 +2,12 @@
     <x-ui.headingBanner title="Hubungi Kami" image="images/header/contact-us.webp" />
 
     <section class="mt-4 lg:mt-8">
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-4 lg:gap-8">
             <div>
                 <p class="text-pink-500 font-semibold">STALKING-IN</p>
                 <h1 class="text-2xl font-bold">Sosial Media Kami</h1>
             </div>
-            <div class="grid lg:grid-cols-4 gap-2">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
                 @php
                     // Array warna yang akan digunakan untuk setiap item
                     $colors = ['bg-green-500', 'bg-rose-500', 'bg-slate-800', 'bg-blue-500', 'bg-purple-500'];
@@ -28,9 +28,9 @@
                                 class="w-full h-full flex items-center gap-4 {{ $colors[$index % count($colors)] }} rounded-lg p-2 md:p-4">
                                 <div class="bg-white rounded-lg p-2">
                                     <x-icons.icon type="{{ $c->name }}"
-                                        class="w-6 h-6 lg:w-12 lg:h-12 fill-current {{ $iconColors[$index % count($iconColors)] }}" />
+                                        class="w-4 h-4 lg:w-12 lg:h-12 fill-current {{ $iconColors[$index % count($iconColors)] }}" />
                                 </div>
-                                <h1 class="text-white text-2xl font-semibold">{{ $c->name }}</h1>
+                                <h1 class="text-white text-lg lg:text-2xl font-semibold">{{ $c->name }}</h1>
                             </div>
                         </a>
                     @endif

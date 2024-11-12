@@ -15,6 +15,8 @@
             </button>
         </div>
     </div>
+    <x-ui.flash-message :message="session('success')" type="success" id="toast-success" />
+    <x-ui.flash-message :message="session('error')" type="error" id="toast-error" />
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @if ($tour->tourImages->isEmpty())

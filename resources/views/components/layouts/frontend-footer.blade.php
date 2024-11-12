@@ -6,25 +6,29 @@
         ],
         [
             'title' => 'Tentang Kaka',
-            'link' => '/',
+            'link' => '/tentangkaka',
         ],
         [
             'title' => 'Tour',
-            'link' => '/',
+            'link' => '/tour',
         ],
         [
-            'title' => 'Layanan',
-            'link' => '/',
+            'title' => 'Gallery',
+            'link' => '/galleries',
+        ],
+        [
+            'title' => 'Contact',
+            'link' => '/contact',
         ],
     ];
     $document = [
         [
             'title' => 'Syarat dan ketentuan',
-            'link' => '/',
+            'link' => '/syarat-dan-ketentuan',
         ],
         [
             'title' => 'Kebijakan Privasi',
-            'link' => '/',
+            'link' => '/kebijakan-privasi',
         ],
     ];
     $sosialMedia = [

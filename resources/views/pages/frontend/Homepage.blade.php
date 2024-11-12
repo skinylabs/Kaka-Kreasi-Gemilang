@@ -131,7 +131,7 @@
     <section
         class="w-full flex flex-col justify-center items-center mt-8 md:flex-row md:justify-between md:mt-16 md:mb-16">
         <!-- Gambar (Elemen Kiri) -->
-        <div class="w-full md:w-2/6">
+        <div class="w-full mb-8 md:w-2/6 md:mb-0 ">
             <div
                 class="bg-yellow-400 h-64 w-full -mx-12 rounded-r-full overflow-visible flex justify-center items-center md:h-full">
                 <div>

@@ -8,7 +8,8 @@
             <div class="text-sm sm:text-base">
                 <ol class="list-none p-0 inline-flex space-x-2">
                     <li class="flex items-center">
-                        <a href="/tours" class="text-gray-600 hover:text-blue-500 transition-colors duration-300">KAKA
+                        <a href="/admin/tour"
+                            class="text-gray-600 hover:text-blue-500 transition-colors duration-300">KAKA
                             TOUR</a>
                         <p class="ml-2">/</p>
                     </li>

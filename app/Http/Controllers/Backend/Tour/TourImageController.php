@@ -31,6 +31,7 @@ class TourImageController extends Controller
      */
     public function store(Request $request, Tour $tour)
     {
+        // dd($request->all(), $tour);
         // Validasi input
         $request->validate([
             'images' => 'required|array',

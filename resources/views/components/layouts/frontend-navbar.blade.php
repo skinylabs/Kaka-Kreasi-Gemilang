@@ -19,8 +19,11 @@
                 <li>
                     <a class="hover:text-gray-500" href="/tour">Tour</a>
                 </li>
+                <li>
+                    <a class="hover:text-gray-500" href="/galleries">Gallery</a>
+                </li>
                 <!-- Dropdown Layanan (hanya untuk desktop) -->
-                <li class="relative md:block hidden">
+                {{-- <li class="relative md:block hidden">
                     <button id="dropdown-btn" class="flex items-center hover:text-gray-500 cursor-pointer">
                         Layanan
                         <!-- Icon panah -->
@@ -39,7 +42,7 @@
                             <a class="block px-4 py-2 hover:bg-gray-100" href="/sewa-kendaraan">Sewa Kendaraan</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li>
                     <a class="hover:text-gray-500" href="/contact">Contact</a>
                 </li>
@@ -83,6 +86,7 @@
     }
 
     overlay.addEventListener('click', function() {
+        // Hide menu and overlay when clicking outside
         navLinks.classList.add('left-[-100%]');
         navLinks.classList.remove('left-0');
         overlay.classList.add('hidden');
@@ -90,6 +94,9 @@
         header.classList.add('bg-white');
         menuIcon.style.color = 'black';
         body.classList.remove('overflow-hidden');
+
+        // Change the menu icon back to hamburger
+        menuIcon.setAttribute('name', 'menu');
     });
 
     if (dropdownBtn) {
@@ -102,7 +109,6 @@
     function setupMobileMenu() {
         const dropdownItems = `
             <li><a class="hover:text-gray-500" href="/galleries">Gallery</a></li>
-            <li><a class="hover:text-gray-500" href="/sewakendaraan">Sewa Kendaraan</a></li>
         `;
         const menuItems = `
             <li><a class="hover:text-gray-500" href="/">Homepage</a></li>
@@ -118,9 +124,9 @@
         setupMobileMenu();
     }
 
-    // Menambahkan shadow pada header saat di-scroll
+    // Add shadow to header on scroll for desktop/tablet view only
     window.addEventListener('scroll', function() {
-        if (window.innerWidth >= 768) { // Hanya untuk tablet/desktop
+        if (window.innerWidth >= 768) {
             if (window.scrollY > 50) {
                 header.classList.add('shadow');
             } else {
@@ -129,3 +135,7 @@
         }
     });
 </script>
+
+
+
+{{-- <li><a class="hover:text-gray-500" href="/sewakendaraan">Sewa Kendaraan</a></li> --}}
